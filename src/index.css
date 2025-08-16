@@ -1,3 +1,8 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@theme {
+  --color-primary-red: #994D4D;
+  --color-secundary-red: #9D1309;
+  --color-text-dark: #374151;
+  --color-text-light: #6B7280;
+}

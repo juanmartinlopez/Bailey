@@ -5,11 +5,12 @@ export default {
     extend: {
       colors: {
         primary: {
-          red: "#994D4D",
+          red: "var(--color-primary-red)",
+          secundary: "var(--color-secundary-red)",
         },
         text: {
-          dark: "#374151", // gris oscuro para títulos
-          light: "#6B7280", // gris más claro para texto secundario
+          dark: "var(--color-text-dark)",
+          light: "var(--color-text-light)",
         },
       },
     },

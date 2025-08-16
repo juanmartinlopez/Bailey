@@ -52,17 +52,17 @@ function Cards() {
   };
 
   return (
-    <div className="w-full">
+    <div className="w-full mb-8 min-h-screen">
       {/* Navegación de categorías */}
-      <div className="flex justify-center gap-8 mb-8">
+      <div className="flex justify-center gap-8">
         {(["burgers", "pachata", "fries"] as Category[]).map((category) => (
           <button
             key={category}
             onClick={() => setSelectedCategory(category)}
             className={`flex flex-col items-center p-4 rounded-lg transition-all duration-200 ${
               selectedCategory === category
-                ? "bg-primary-red text-white"
-                : "bg-gray-100 text-text-dark hover:bg-gray-200"
+                ? "text-secundary-red "
+                : "text-text-dark"
             }`}
           >
             <div className="text-3xl mb-2">{getCategoryIcon(category)}</div>
