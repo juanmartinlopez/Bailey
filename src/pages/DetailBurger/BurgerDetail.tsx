@@ -4,8 +4,10 @@ import burger3 from "@assets/burger3.png";
 import burger4 from "@assets/burger4.png";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import Swal from "sweetalert2";
 import { Footer } from "../../components";
 import NavBarSecundary from "../../components/NavBarSecundary/NavBarSecundary";
+import { useCartContext } from "../../context";
 import addons from "../../DB/Addons";
 import burgers from "../../DB/Burger";
 import type { Burger } from "../../types";
@@ -13,14 +15,15 @@ import type { Burger } from "../../types";
 function BurgerDetail() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
+  const { addToCart } = useCartContext();
   const [burger, setBurger] = useState<Burger | null>(null);
   const [selectedSize, setSelectedSize] = useState<
     "Simple" | "Doble" | "Triple"
   >("Simple");
-  const [quantity, setQuantity] = useState(1);
   const [selectedAddons, setSelectedAddons] = useState<{
     [key: number]: boolean;
   }>({});
+  const [comment, setComment] = useState<string>("");
 
   useEffect(() => {
     if (id) {
@@ -76,7 +79,9 @@ function BurgerDetail() {
     }));
   };
 
-  const handleAddToCart = () => {
+  const handleAddToCart = async () => {
+    if (!burger) return;
+
     // Obtener los agregados seleccionados con sus detalles
     const selectedAddonsList = Object.entries(selectedAddons)
       .filter(([_, isSelected]) => isSelected)
@@ -86,25 +91,67 @@ function BurgerDetail() {
       })
       .filter(Boolean);
 
-    console.log("Agregado al carrito:", {
-      burger,
+    // Crear el item del carrito
+    const cartItem = {
+      id: `burger-${burger.id}-${selectedSize}-${Date.now()}`, // ID único
+      type: "burger" as const,
+      product: burger,
       size: selectedSize,
-      quantity,
+      quantity: 1,
+      comment: comment,
       addons: selectedAddonsList,
-      totalPrice: getCurrentPrice() * quantity,
+      totalPrice: getCurrentPrice(),
+    };
+
+    // Agregar al carrito
+    addToCart(cartItem);
+
+    // Limpiar el formulario después de agregar al carrito
+    setComment("");
+    setSelectedAddons({});
+    setSelectedSize("Simple");
+
+    console.log("Agregado al carrito:", cartItem);
+
+    // Mostrar alerta personalizada con SweetAlert2
+    const result = await Swal.fire({
+      title: "¡Producto agregado!",
+      text: `${burger.name} (${selectedSize}) ha sido agregado al carrito`,
+      icon: "success",
+      showCancelButton: true,
+      confirmButtonText: "Ir al carrito",
+      cancelButtonText: "Seguir comprando",
+      confirmButtonColor: "#dc2626", // color rojo acorde a primary-red
+      cancelButtonColor: "#6b7280", // color gris
+      background: "#ffffff",
+      customClass: {
+        popup: "rounded-lg shadow-xl",
+        title: "text-gray-900 font-bold",
+        confirmButton: "font-medium px-6 py-2 rounded-lg",
+        cancelButton: "font-medium px-6 py-2 rounded-lg",
+      },
+      buttonsStyling: true,
     });
+
+    if (result.isConfirmed) {
+      // Ir al carrito
+      navigate("/cart");
+    } else if (result.isDismissed) {
+      // Seguir comprando - redirigir al home
+      navigate("/");
+    }
   };
 
   if (!burger) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center">
         <p className="text-lg">Cargando...</p>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen">
       {/* Header */}
       <NavBarSecundary />
 
@@ -139,7 +186,7 @@ function BurgerDetail() {
                   {Object.values(addons).map((addon) => (
                     <label
                       key={addon.id}
-                      className="flex items-center justify-between p-3 rounded-lg border border-gray-200 hover:bg-gray-50 cursor-pointer transition-colors"
+                      className="flex items-center justify-between p-3 rounded-lg cursor-pointer transition-colors"
                     >
                       <div className="flex flex-col">
                         <span className="text-gray-700 font-medium">
@@ -158,7 +205,7 @@ function BurgerDetail() {
                         />
                         {selectedAddons[addon.id] && (
                           <svg
-                            className="absolute top-0.5 left-0.5 w-3 h-3 text-white pointer-events-none"
+                            className="absolute inset-0 text-white pointer-events-none p-0.5"
                             fill="currentColor"
                             viewBox="0 0 20 20"
                           >
@@ -214,31 +261,28 @@ function BurgerDetail() {
                 </div>
               </div>
 
-              {/* Controles de cantidad y botón */}
-              <div className="flex flex-col sm:flex-row items-center gap-4 sm:justify-between">
-                <div className="flex items-center border border-gray-300 rounded-lg">
-                  <button
-                    onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                    className="w-10 h-10 flex items-center justify-center text-gray-600 hover:bg-gray-100"
-                  >
-                    −
-                  </button>
-                  <span className="w-12 text-center text-lg font-medium">
-                    {quantity}
-                  </span>
-                  <button
-                    onClick={() => setQuantity(quantity + 1)}
-                    className="w-10 h-10 flex items-center justify-center text-gray-600 hover:bg-gray-100"
-                  >
-                    +
-                  </button>
-                </div>
+              {/* Comentario especial */}
+              <div className="mb-6">
+                <h2 className="text-lg md:text-xl font-semibold text-gray-900 mb-4">
+                  Comentario especial
+                </h2>
+                <textarea
+                  value={comment}
+                  onChange={(e) => setComment(e.target.value)}
+                  placeholder="¿Alguna especificación especial? (ej: sin lechuga, sin tomate, punto de cocción, etc.)"
+                  className="w-full p-3 border-2 border-gray-300 rounded-lg focus:border-primary-red focus:ring-2 focus:ring-primary-red focus:ring-opacity-50 transition-colors resize-none"
+                  rows={3}
+                />
+              </div>
+
+              {/* Botón agregar al carrito */}
+              <div className="flex justify-end">
                 <button
                   onClick={handleAddToCart}
-                  className="bg-primary-red text-white px-6 py-3 rounded-lg font-medium hover:bg-primary-secundary transition-colors w-full sm:w-auto"
+                  className="bg-secundary-red text-white px-6 py-3 rounded-lg font-medium hover:bg-primary-red transition-colors w-full sm:w-auto"
                 >
                   <p>Agregar al carrito</p>
-                  <p>${getCurrentPrice() * quantity}</p>
+                  <p>${getCurrentPrice()}</p>
                 </button>
               </div>
             </div>

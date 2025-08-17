@@ -1,11 +1,15 @@
 import { HiOutlineShoppingCart } from "react-icons/hi";
 import { useNavigate } from "react-router-dom";
+import { useCartContext } from "../../context";
 
 function NavBarSecundary() {
   const navigate = useNavigate();
+  const { getTotalItems } = useCartContext();
+  const totalItems = getTotalItems();
+
   return (
     <nav className="bg-primary-white shadow-sm py-4">
-      <div className="container mx-auto px-4 flex justify-between items-cente">
+      <div className="container mx-auto px-4 flex justify-between items-center">
         <div className="flex items-center mr-10">
           <button onClick={() => navigate("/")} className="p-2">
             <svg
@@ -23,9 +27,17 @@ function NavBarSecundary() {
             Bailey's Burger
           </h2>
         </div>
-        <div className="text-gray text-3xl cursor-pointer hover:text-dark transition-colors">
+        <button
+          onClick={() => navigate("/cart")}
+          className="relative text-gray text-3xl cursor-pointer hover:text-dark transition-colors"
+        >
           <HiOutlineShoppingCart />
-        </div>
+          {totalItems > 0 && (
+            <span className="absolute -top-2 -right-2 bg-primary-red text-white rounded-full w-6 h-6 text-xs flex items-center justify-center font-bold">
+              {totalItems > 99 ? "99+" : totalItems}
+            </span>
+          )}
+        </button>
       </div>
     </nav>
   );

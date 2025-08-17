@@ -1,8 +1,23 @@
-@import "tailwindcss";
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
 
-@theme {
-  --color-primary-red: #994D4D;
-  --color-secundary-red: #9D1309;
-  --color-text-dark: #374151;
-  --color-text-light: #6B7280;
+/* Fallback (por si la build corre antes de reinstalar dependencias): utilidades manuales */
+.text-primary-red { color: #994D4D; }
+.bg-primary-red { background-color: #994D4D; }
+.bg-secundary-red { background-color: #9D1309; }
+.text-text-dark { color: #374151; }
+.text-text-light { color: #6B7280; }
+
+/* Estilos para Leaflet Maps */
+.leaflet-container {
+  font-family: inherit;
+}
+
+.leaflet-popup-content-wrapper {
+  border-radius: 8px;
+}
+
+.leaflet-popup-tip-container {
+  display: none;
 }
