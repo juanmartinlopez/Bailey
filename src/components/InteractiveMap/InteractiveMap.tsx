@@ -1,6 +1,7 @@
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import { useEffect, useState } from "react";
+import { LuMapPin } from "react-icons/lu";
 import {
   MapContainer,
   Marker,
@@ -113,12 +114,9 @@ function InteractiveMap({
       </MapContainer>
 
       {!disabled && (
-        <div className="mt-2 text-sm text-gray-600">
-          <p>📍 Haz clic en el mapa para seleccionar tu ubicación exacta</p>
-          <p className="text-xs">
-            Coordenadas: {selectedPosition.lat.toFixed(6)},{" "}
-            {selectedPosition.lng.toFixed(6)}
-          </p>
+        <div className="mt-2 text-sm text-gray-600 flex items-center justify-center mb-1">
+          <LuMapPin className="mr-2 text-secundary-red" />
+          <p>Haz clic en el mapa para seleccionar tu ubicación exacta</p>
         </div>
       )}
     </div>

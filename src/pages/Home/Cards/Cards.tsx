@@ -1,5 +1,7 @@
 import { useState } from "react";
-import { GiFrenchFries, GiHamburger, GiSandwich } from "react-icons/gi";
+import { CiFries } from "react-icons/ci";
+import { GiSandwich } from "react-icons/gi";
+import { PiHamburgerFill } from "react-icons/pi";
 import burgers from "../../../DB/Burger";
 import fries from "../../../DB/Fries";
 import pachata from "../../../DB/Pachata";
@@ -28,11 +30,11 @@ function Cards() {
   const getCategoryIcon = (category: Category) => {
     switch (category) {
       case "burgers":
-        return <GiHamburger />;
+        return <PiHamburgerFill />;
       case "pachata":
         return <GiSandwich />;
       case "fries":
-        return <GiFrenchFries />;
+        return <CiFries />;
       default:
         return null;
     }
@@ -52,7 +54,7 @@ function Cards() {
   };
 
   return (
-    <div className="w-full mb-8 min-h-screen">
+    <div className="w-full mb-8">
       {/* Navegación de categorías */}
       <div className="flex justify-center gap-8">
         {(["burgers", "pachata", "fries"] as Category[]).map((category) => (

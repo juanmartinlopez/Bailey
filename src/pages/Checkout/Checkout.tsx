@@ -226,9 +226,9 @@ function Checkout() {
   };
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="bg-white">
       <NavBarSecundary />
-      <div className="container mx-auto">
+      <div className="container mx-auto min-h-[80vh]">
         <div className="max-w-4xl mx-auto px-4 py-8">
           <h1 className="text-3xl font-bold text-gray-900 mb-8 text-center">
             Finalizar Pedido
@@ -236,8 +236,50 @@ function Checkout() {
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {/* Columna izquierda - Opciones de entrega */}
+
             <div className="space-y-6">
               {/* Tipo de entrega */}
+              {/* Método de pago */}
+              <div className="bg-white rounded-lg shadow-md p-6">
+                <h2 className="text-xl font-bold text-gray-900 mb-4">
+                  Método de pago
+                </h2>
+
+                <div className="space-y-3">
+                  <label className="flex items-center space-x-3 cursor-pointer">
+                    <input
+                      type="radio"
+                      name="paymentMethod"
+                      value="Mercado Pago"
+                      checked={paymentMethod === "Mercado Pago"}
+                      onChange={(e) =>
+                        setPaymentMethod(e.target.value as PaymentMethod)
+                      }
+                      className="w-4 h-4 focus:ring-primary-red accent-primary-red"
+                    />
+                    <span className="text-lg font-medium text-gray-900">
+                      Mercado Pago
+                    </span>
+                  </label>
+
+                  <label className="flex items-center space-x-3 cursor-pointer">
+                    <input
+                      type="radio"
+                      name="paymentMethod"
+                      value="Efectivo"
+                      checked={paymentMethod === "Efectivo"}
+                      onChange={(e) =>
+                        setPaymentMethod(e.target.value as PaymentMethod)
+                      }
+                      className="w-4 h-4 focus:ring-primary-red accent-primary-red"
+                    />
+                    <span className="text-lg font-medium text-gray-900">
+                      Efectivo
+                    </span>
+                  </label>
+                </div>
+              </div>
+
               <div className="bg-white rounded-lg shadow-md p-6">
                 <h2 className="text-xl font-bold text-gray-900 mb-4">
                   Método de entrega
@@ -253,7 +295,7 @@ function Checkout() {
                       onChange={(e) =>
                         handleDeliveryTypeChange(e.target.value as DeliveryType)
                       }
-                      className="w-4 h-4 text-primary-red focus:ring-primary-red"
+                      className="w-4 h-4 focus:ring-primary-red accent-primary-red"
                     />
                     <span className="text-lg font-medium text-gray-900">
                       Envío a domicilio
@@ -269,7 +311,7 @@ function Checkout() {
                       onChange={(e) =>
                         handleDeliveryTypeChange(e.target.value as DeliveryType)
                       }
-                      className="w-4 h-4 text-primary-red focus:ring-primary-red"
+                      className="w-4 h-4 focus:ring-primary-red accent-primary-red"
                     />
                     <span className="text-lg font-medium text-gray-900">
                       Retiro en local
@@ -311,15 +353,6 @@ function Checkout() {
                       <label className="block text-sm font-medium text-gray-700 mb-1">
                         Comentarios adicionales (opcional)
                       </label>
-                      <textarea
-                        value={deliveryInfo.comment}
-                        onChange={(e) =>
-                          handleDeliveryInfoChange("comment", e.target.value)
-                        }
-                        rows={3}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-red focus:border-transparent resize-none"
-                        placeholder="Ej: Horario preferido, observaciones especiales"
-                      />
                     </div>
                   </div>
                 </div>
@@ -460,47 +493,6 @@ function Checkout() {
                   </div>
                 </div>
               )}
-
-              {/* Método de pago */}
-              <div className="bg-white rounded-lg shadow-md p-6">
-                <h2 className="text-xl font-bold text-gray-900 mb-4">
-                  Método de pago
-                </h2>
-
-                <div className="space-y-3">
-                  <label className="flex items-center space-x-3 cursor-pointer">
-                    <input
-                      type="radio"
-                      name="paymentMethod"
-                      value="Mercado Pago"
-                      checked={paymentMethod === "Mercado Pago"}
-                      onChange={(e) =>
-                        setPaymentMethod(e.target.value as PaymentMethod)
-                      }
-                      className="w-4 h-4 text-primary-red focus:ring-primary-red"
-                    />
-                    <span className="text-lg font-medium text-gray-900">
-                      Mercado Pago
-                    </span>
-                  </label>
-
-                  <label className="flex items-center space-x-3 cursor-pointer">
-                    <input
-                      type="radio"
-                      name="paymentMethod"
-                      value="Efectivo"
-                      checked={paymentMethod === "Efectivo"}
-                      onChange={(e) =>
-                        setPaymentMethod(e.target.value as PaymentMethod)
-                      }
-                      className="w-4 h-4 text-primary-red focus:ring-primary-red"
-                    />
-                    <span className="text-lg font-medium text-gray-900">
-                      Efectivo
-                    </span>
-                  </label>
-                </div>
-              </div>
             </div>
 
             {/* Columna derecha - Resumen del pedido */}
@@ -551,17 +543,18 @@ function Checkout() {
                 {/* Totales */}
                 <div className="mt-6 pt-4 border-t border-gray-200">
                   <div className="space-y-2">
+                    {deliveryType === "delivery" && (
+                      <div className="flex justify-between text-gray-600">
+                        <span className="text-primary-red">
+                          ¡El precio del envío será enviado por WhatsApp!
+                        </span>
+                      </div>
+                    )}
+
                     <div className="flex justify-between text-gray-600">
                       <span>Subtotal</span>
                       <span>${subtotal}</span>
                     </div>
-
-                    {deliveryType === "delivery" && (
-                      <div className="flex justify-between text-gray-600">
-                        <span>Envío</span>
-                        <span>${deliveryFee}</span>
-                      </div>
-                    )}
 
                     <div className="flex justify-between text-xl font-bold text-gray-900 pt-2 border-t border-gray-200">
                       <span>Total</span>

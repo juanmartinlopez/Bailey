@@ -151,20 +151,20 @@ function BurgerDetail() {
   }
 
   return (
-    <div className="min-h-screen">
+    <div>
       {/* Header */}
       <NavBarSecundary />
 
       {/* Content */}
-      <div className="bg-white">
+      <div className="bg-white min-h-[80vh]">
         <div className="max-w-4xl mx-auto">
           <div className="md:flex md:gap-8">
             {/* Imagen de la hamburguesa */}
-            <div className="w-full md:w-1/2 h-80 md:h-96 bg-gray-900 flex items-center justify-center">
+            <div className="w-full md:w-1/2 h-80 md:h-96 bg-gray-900 flex items-center justify-center md:rounded-3xl">
               <img
                 src={getBurgerImage()}
                 alt={burger.name}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover md:rounded-3xl"
               />
             </div>
 
@@ -276,13 +276,17 @@ function BurgerDetail() {
               </div>
 
               {/* Botón agregar al carrito */}
-              <div className="flex justify-end">
+              <div className="flex justify-end w-full">
                 <button
                   onClick={handleAddToCart}
-                  className="bg-secundary-red text-white px-6 py-3 rounded-lg font-medium hover:bg-primary-red transition-colors w-full sm:w-auto"
+                  className="bg-secundary-red text-white px-6 py-3 rounded-lg font-medium hover:bg-primary-red transition-colors w-full sm:w-auto flex flex-col sm:flex-row sm:items-center sm:gap-2 text-center"
                 >
-                  <p>Agregar al carrito</p>
-                  <p>${getCurrentPrice()}</p>
+                  <span className="text-sm sm:text-base">
+                    Agregar al carrito
+                  </span>
+                  <span className="font-bold text-lg sm:text-base">
+                    ${getCurrentPrice()}
+                  </span>
                 </button>
               </div>
             </div>

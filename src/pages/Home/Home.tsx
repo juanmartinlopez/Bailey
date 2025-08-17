@@ -4,9 +4,9 @@ import Cards from "./Cards/Cards";
 
 function Home() {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen">
       <NavBar />
-      <div className="container mx-auto">
+      <div className="container mx-auto min-h-[80vh]">
         <Cards />
       </div>
       <Footer />

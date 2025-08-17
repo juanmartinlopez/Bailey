@@ -122,16 +122,16 @@ function PachataDetail() {
   }
 
   return (
-    <div className="min-h-screen">
+    <div>
       {/* Header */}
       <NavBarSecundary />
 
       {/* Content */}
-      <div className="bg-white">
+      <div className="bg-white min-h-[80vh]">
         <div className="max-w-4xl mx-auto">
-          <div className="md:flex md:gap-8">
+          <div className="md:flex md:gap-8 md:rounded-3xl">
             {/* Imagen de la pachata */}
-            <div className="w-full md:w-1/2 h-80 md:h-96 bg-gradient-to-br from-yellow-400 to-orange-500 flex items-center justify-center">
+            <div className="w-full md:w-1/2 h-80 md:h-96 bg-gradient-to-br from-yellow-400 to-orange-500 flex items-center justify-center md:rounded-3xl">
               <div className="text-9xl">🥙</div>
             </div>
 

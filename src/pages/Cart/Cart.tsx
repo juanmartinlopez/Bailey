@@ -86,7 +86,7 @@ function Cart() {
     return (
       <div className="bg-white">
         <NavBarSecundary />
-        <div className="min-h-screen flex items-center justify-center">
+        <div className="min-h-[80vh] flex items-center justify-center">
           <div className="text-center">
             <h2 className="text-2xl font-bold text-gray-900 mb-4">
               Tu carrito está vacío
@@ -110,10 +110,10 @@ function Cart() {
   return (
     <div className="bg-white">
       <NavBarSecundary />
-      <div className="min-h-screen bg-gray-50 py-8">
+      <div className="min-h-[80vh] bg-gray-50 py-8">
         <div className="max-w-4xl mx-auto px-4">
           <div className="bg-white rounded-lg shadow-md p-6">
-            <div className="flex justify-between items-center mb-6">
+            <div className="flex justify-between flex-col items-start mb-6">
               <h1 className="text-2xl md:text-3xl font-bold text-gray-900">
                 Mi Carrito ({getTotalItems()}{" "}
                 {getTotalItems() === 1 ? "producto" : "productos"})

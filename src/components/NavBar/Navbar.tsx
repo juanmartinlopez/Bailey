@@ -1,4 +1,4 @@
-import { HiOutlineShoppingCart } from "react-icons/hi";
+import { PiShoppingCartLight } from "react-icons/pi";
 import { Link } from "react-router-dom";
 import logo from "../../assets/logo.png";
 import { useCartContext } from "../../context";
@@ -8,7 +8,7 @@ function NavBar() {
   const totalItems = getTotalItems();
 
   return (
-    <nav className="bg-primary-white py-4">
+    <nav className="bg-primary-white h-[10vh] flex flex-row items-center">
       <div className="container mx-auto px-4 flex justify-between items-center">
         <div className="flex items-center mr-10">
           <img src={logo} alt="logo" className="w-10 h-10" />
@@ -22,7 +22,7 @@ function NavBar() {
           to="/cart"
           className="relative text-gray text-3xl cursor-pointer hover:text-dark transition-colors"
         >
-          <HiOutlineShoppingCart />
+          <PiShoppingCartLight />
           {totalItems > 0 && (
             <span className="absolute -top-2 -right-2 bg-primary-red text-white rounded-full w-6 h-6 text-xs flex items-center justify-center font-bold">
               {totalItems > 99 ? "99+" : totalItems}
