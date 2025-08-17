@@ -2,6 +2,7 @@ import {
   BurgerDetail,
   Cart,
   Checkout,
+  Error,
   FriesDetail,
   Home,
   PachataDetail,
@@ -17,6 +18,7 @@ function App() {
       <Route path="/pachata/:id" element={<PachataDetail />} />
       <Route path="/cart" element={<Cart />} />
       <Route path="/checkout" element={<Checkout />} />
+      <Route path="*" element={<Error />} />
     </Routes>
   );
 }
