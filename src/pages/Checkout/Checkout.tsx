@@ -136,7 +136,7 @@ function Checkout() {
     )}\n\n${addressPart}\nMétodo de pago: ${paymentMethod}\nTotal: $${total}`;
 
     // Número de teléfono del local (formato internacional sin + ni espacios). Ajustar según corresponda.
-    const phoneNumber = "2645704903"; // TODO: reemplazar por número real
+    const phoneNumber = "542645704903"; // TODO: reemplazar por número real
     const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(
       message
     )}`;
