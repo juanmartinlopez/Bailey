@@ -169,7 +169,7 @@ function BurgerDetail() {
               <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
                 {burger.name}
               </h1>
-              <p className="text-primary-secundary text-sm md:text-base mb-6">
+              <p className="text-secundary-red text-sm md:text-base mb-6">
                 {burger.description}
               </p>
 
