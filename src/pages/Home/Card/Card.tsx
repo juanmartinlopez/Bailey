@@ -2,6 +2,9 @@ import burger1 from "@assets/burger1.png";
 import burger2 from "@assets/burger2.png";
 import burger3 from "@assets/burger3.png";
 import burger4 from "@assets/burger4.png";
+import { CiFries } from "react-icons/ci";
+import { GiSandwich } from "react-icons/gi";
+import { PiHamburgerFill } from "react-icons/pi";
 import { useNavigate } from "react-router-dom";
 import type { Burger, Fries, Pachata } from "../../../types";
 
@@ -45,11 +48,11 @@ function Card({ item, category }: CardProps) {
   // Placeholder para imagen - puedes reemplazar con imágenes reales
   const getImagePlaceholder = () => {
     if (category === "burgers") {
-      return "🍔";
+      return <PiHamburgerFill />;
     } else if (category === "pachata") {
-      return "🥙";
+      return <GiSandwich />;
     } else {
-      return "🍟";
+      return <CiFries />;
     }
   };
 
@@ -89,8 +92,8 @@ function Card({ item, category }: CardProps) {
       className="bg-white rounded-lg shadow-md shadow-gray-400 hover:shadow-xl transition-shadow duration-200 overflow-hidden m-3 cursor-pointer"
     >
       <div className="flex p-4">
-        {/* Imagen */}
-        <div className="w-20 h-20 rounded-lg flex items-center justify-center mr-4 flex-shrink-0 overflow-hidden">
+        {/* Imagen
+        
           {itemImage ? (
             <img
               src={itemImage}
@@ -98,11 +101,13 @@ function Card({ item, category }: CardProps) {
               className="w-full h-full object-cover rounded-lg"
             />
           ) : (
-            <div className="w-full h-full bg-gradient-to-br from-yellow-400 to-orange-500 rounded-lg flex items-center justify-center text-3xl">
-              {getImagePlaceholder()}
-            </div>
-          )}
+            <div className="w-20 h-20 rounded-lg flex items-center justify-center mr-4 flex-shrink-0 overflow-hidden">
+          <div className="w-full h-full bg-gradient-to-br rounded-lg flex items-center justify-center text-3xl text-primary-red">
+            {getImagePlaceholder()}
+          </div>
         </div>
+          )}
+         */}
 
         {/* Contenido */}
         <div className="flex-1">

@@ -177,6 +177,45 @@ function BurgerDetail() {
                 {burger.description}
               </p>
 
+              {/* Elegir tamaño */}
+              <div className="mb-6">
+                <h2 className="text-lg md:text-xl font-semibold text-gray-900 mb-4">
+                  Elegir tamaño
+                </h2>
+                <div className="flex gap-3 justify-around">
+                  <button
+                    onClick={() => setSelectedSize("Simple")}
+                    className={`px-6 py-2 rounded-full border-2 transition-colors ${
+                      selectedSize === "Simple"
+                        ? "border-primary-red text-primary-red bg-red-50"
+                        : "border-gray-300 text-gray-700 bg-white"
+                    }`}
+                  >
+                    Simple
+                  </button>
+                  <button
+                    onClick={() => setSelectedSize("Doble")}
+                    className={`px-6 py-2 rounded-full border-2 transition-colors ${
+                      selectedSize === "Doble"
+                        ? "border-primary-red text-primary-red bg-red-50"
+                        : "border-gray-300 text-gray-700 bg-white"
+                    }`}
+                  >
+                    Doble
+                  </button>
+                  <button
+                    onClick={() => setSelectedSize("Triple")}
+                    className={`px-6 py-2 rounded-full border-2 transition-colors ${
+                      selectedSize === "Triple"
+                        ? "border-primary-red text-primary-red bg-red-50"
+                        : "border-gray-300 text-gray-700 bg-white"
+                    }`}
+                  >
+                    Triple
+                  </button>
+                </div>
+              </div>
+
               {/* Agregados */}
               <div className="mb-6">
                 <h2 className="text-lg md:text-xl font-semibold text-gray-900 mb-4">
@@ -219,45 +258,6 @@ function BurgerDetail() {
                       </div>
                     </label>
                   ))}
-                </div>
-              </div>
-
-              {/* Elegir tamaño */}
-              <div className="mb-6">
-                <h2 className="text-lg md:text-xl font-semibold text-gray-900 mb-4">
-                  Elegir tamaño
-                </h2>
-                <div className="flex gap-3 justify-around">
-                  <button
-                    onClick={() => setSelectedSize("Simple")}
-                    className={`px-6 py-2 rounded-full border-2 transition-colors ${
-                      selectedSize === "Simple"
-                        ? "border-primary-red text-primary-red bg-red-50"
-                        : "border-gray-300 text-gray-700 bg-white"
-                    }`}
-                  >
-                    Simple
-                  </button>
-                  <button
-                    onClick={() => setSelectedSize("Doble")}
-                    className={`px-6 py-2 rounded-full border-2 transition-colors ${
-                      selectedSize === "Doble"
-                        ? "border-primary-red text-primary-red bg-red-50"
-                        : "border-gray-300 text-gray-700 bg-white"
-                    }`}
-                  >
-                    Doble
-                  </button>
-                  <button
-                    onClick={() => setSelectedSize("Triple")}
-                    className={`px-6 py-2 rounded-full border-2 transition-colors ${
-                      selectedSize === "Triple"
-                        ? "border-primary-red text-primary-red bg-red-50"
-                        : "border-gray-300 text-gray-700 bg-white"
-                    }`}
-                  >
-                    Triple
-                  </button>
                 </div>
               </div>
 
