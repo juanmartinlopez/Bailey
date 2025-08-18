@@ -31,13 +31,6 @@ function FriesDetail() {
     }
   }, [id, navigate]);
 
-  const handleAddonChange = (addonId: number) => {
-    setSelectedAddons((prev) => ({
-      ...prev,
-      [addonId]: !prev[addonId],
-    }));
-  };
-
   const getCurrentPrice = () => {
     if (!friesItem) return 0;
 
@@ -131,9 +124,9 @@ function FriesDetail() {
         <div className="max-w-4xl mx-auto">
           <div className="md:flex md:gap-8 rounded-3xl">
             {/* Imagen de las papas */}
-            <div className="w-full md:w-1/2 h-80 md:h-96 bg-gradient-to-br from-yellow-400 to-orange-500 flex items-center justify-center md:rounded-3xl">
+            {/* <div className="w-full md:w-1/2 h-80 md:h-96 bg-gradient-to-br from-yellow-400 to-orange-500 flex items-center justify-center md:rounded-3xl">
               <div className="text-9xl">🍟</div>
-            </div>
+            </div> */}
 
             {/* Información del producto */}
             <div className="p-6 md:w-1/2 md:p-8">

@@ -1,10 +1,3 @@
-import burger1 from "@assets/burger1.png";
-import burger2 from "@assets/burger2.png";
-import burger3 from "@assets/burger3.png";
-import burger4 from "@assets/burger4.png";
-import { CiFries } from "react-icons/ci";
-import { GiSandwich } from "react-icons/gi";
-import { PiHamburgerFill } from "react-icons/pi";
 import { useNavigate } from "react-router-dom";
 import type { Burger, Fries, Pachata } from "../../../types";
 
@@ -37,24 +30,24 @@ function Card({ item, category }: CardProps) {
   };
 
   // Función para obtener la imagen según el ID del item
-  const getItemImage = () => {
-    if (category === "burgers") {
-      const images = [burger1, burger2, burger3, burger4];
-      return images[(item.id - 1) % images.length];
-    }
-    return null;
-  };
+  // const getItemImage = () => {
+  //   if (category === "burgers") {
+  //     const images = [burger1, burger2, burger3, burger4];
+  //     return images[(item.id - 1) % images.length];
+  //   }
+  //   return null;
+  // };
 
-  // Placeholder para imagen - puedes reemplazar con imágenes reales
-  const getImagePlaceholder = () => {
-    if (category === "burgers") {
-      return <PiHamburgerFill />;
-    } else if (category === "pachata") {
-      return <GiSandwich />;
-    } else {
-      return <CiFries />;
-    }
-  };
+  // // Placeholder para imagen - puedes reemplazar con imágenes reales
+  // const getImagePlaceholder = () => {
+  //   if (category === "burgers") {
+  //     return <PiHamburgerFill />;
+  //   } else if (category === "pachata") {
+  //     return <GiSandwich />;
+  //   } else {
+  //     return <CiFries />;
+  //   }
+  // };
 
   const renderPrice = () => {
     if (category === "burgers") {
@@ -84,7 +77,7 @@ function Card({ item, category }: CardProps) {
     }
   };
 
-  const itemImage = getItemImage();
+  // const itemImage = getItemImage();
 
   return (
     <div

@@ -40,15 +40,8 @@ function Error() {
           {/* Action Buttons */}
           <div className="space-y-4">
             <button
-              onClick={() => navigate(-1)}
-              className="w-full bg-primary-red hover:bg-secundary-red text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
-            >
-              ← Volver atrás
-            </button>
-
-            <button
               onClick={() => navigate("/")}
-              className="w-full bg-gray-800 hover:bg-gray-900 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
+              className="w-full bg-primary-red hover:bg-secundary-red text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
             >
               Ir al inicio
             </button>

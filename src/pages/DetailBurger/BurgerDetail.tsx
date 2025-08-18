@@ -1,7 +1,3 @@
-import burger1 from "@assets/burger1.png";
-import burger2 from "@assets/burger2.png";
-import burger3 from "@assets/burger3.png";
-import burger4 from "@assets/burger4.png";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
@@ -38,11 +34,11 @@ function BurgerDetail() {
     }
   }, [id, navigate]);
 
-  const getBurgerImage = () => {
-    if (!burger) return burger1;
-    const images = [burger1, burger2, burger3, burger4];
-    return images[(burger.id - 1) % images.length];
-  };
+  // const getBurgerImage = () => {
+  //   if (!burger) return burger1;
+  //   const images = [burger1, burger2, burger3, burger4];
+  //   return images[(burger.id - 1) % images.length];
+  // };
 
   const getCurrentPrice = () => {
     if (!burger) return 0;
@@ -160,13 +156,13 @@ function BurgerDetail() {
         <div className="max-w-4xl mx-auto">
           <div className="md:flex md:gap-8">
             {/* Imagen de la hamburguesa */}
-            <div className="w-full md:w-1/2 h-80 md:h-96 bg-gray-900 flex items-center justify-center md:rounded-3xl">
+            {/* <div className="w-full md:w-1/2 h-80 md:h-96 bg-gray-900 flex items-center justify-center md:rounded-3xl">
               <img
                 src={getBurgerImage()}
                 alt={burger.name}
                 className="w-full h-full object-cover md:rounded-3xl"
               />
-            </div>
+            </div> */}
 
             {/* Información del producto */}
             <div className="p-6 md:w-1/2 md:p-8">
