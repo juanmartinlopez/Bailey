@@ -6,6 +6,7 @@ import NavBarSecundary from "../../components/NavBarSecundary/NavBarSecundary";
 import { useCartContext } from "../../context";
 import addons from "../../DB/Addons";
 import pachatas from "../../DB/Pachata";
+import { useSEO } from "../../hooks";
 import type { Pachata } from "../../types";
 
 function PachataDetail() {
@@ -30,6 +31,20 @@ function PachataDetail() {
       }
     }
   }, [id, navigate]);
+
+  // SEO dinámico basado en la pachata
+  useSEO({
+    title: pachata
+      ? `${pachata.name} - Pachatas Bailey's Burger San Juan`
+      : "Pachatas - Bailey's Burger",
+    description: pachata
+      ? `${pachata.description} Deliciosas pachatas en Bailey's Burger, San Juan. Delivery y takeaway disponible. $${pachata.price}.`
+      : "Pachatas deliciosas y frescas en Bailey's Burger, San Juan.",
+    keywords: pachata
+      ? `${pachata.name}, pachatas san juan, delivery pachatas, baileys burger, comida arabe san juan`
+      : "pachatas, san juan, delivery",
+    canonical: `https://baileysburger.com/pachata/${id}`,
+  });
 
   const getCurrentPrice = () => {
     if (!pachata) return 0;

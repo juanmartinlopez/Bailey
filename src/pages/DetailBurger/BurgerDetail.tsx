@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
-import { Footer } from "../../components";
+import { Breadcrumbs, Footer } from "../../components";
 import NavBarSecundary from "../../components/NavBarSecundary/NavBarSecundary";
 import { useCartContext } from "../../context";
 import addons from "../../DB/Addons";
 import burgers from "../../DB/Burger";
+import { useSEO } from "../../hooks";
 import type { Burger } from "../../types";
 
 function BurgerDetail() {
@@ -33,6 +34,22 @@ function BurgerDetail() {
       }
     }
   }, [id, navigate]);
+
+  // SEO dinámico basado en la hamburguesa
+  useSEO({
+    title: burger
+      ? `${burger.name} - Bailey's Burger San Juan`
+      : "Hamburguesa - Bailey's Burger",
+    description: burger
+      ? `${burger.description} Disponible en Bailey's Burger, San Juan. Delivery y takeaway. Desde $${burger.priceSimple}.`
+      : "Deliciosas hamburguesas artesanales en Bailey's Burger, San Juan.",
+    keywords: burger
+      ? `${
+          burger.name
+        }, hamburguesas san juan, smash burger, ${burger.name.toLowerCase()}, delivery hamburguesas`
+      : "hamburguesas, san juan, delivery",
+    canonical: `https://baileysburger.com/burger/${id}`,
+  });
 
   // const getBurgerImage = () => {
   //   if (!burger) return burger1;
@@ -150,6 +167,15 @@ function BurgerDetail() {
     <div>
       {/* Header */}
       <NavBarSecundary />
+
+      {/* Breadcrumbs */}
+      <Breadcrumbs
+        customBreadcrumbs={[
+          { label: "Inicio", path: "/" },
+          { label: "Hamburguesas", path: "/burger" },
+          { label: burger.name, path: `/burger/${id}` },
+        ]}
+      />
 
       {/* Content */}
       <div className="bg-white min-h-[80vh]">

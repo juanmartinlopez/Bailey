@@ -1,0 +1,15 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://baileysburger.com/sitemap.xml
+
+# Block admin pages
+Disallow: /admin/
+Disallow: /checkout/
+Disallow: /cart/
+
+# Allow important pages
+Allow: /burger/
+Allow: /fries/
+Allow: /pachata/

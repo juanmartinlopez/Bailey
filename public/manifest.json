@@ -1,0 +1,27 @@
+{
+  "name": "Bailey's Burger - Hamburguesas Artesanales San Juan",
+  "short_name": "Bailey's Burger",
+  "description": "Las mejores hamburguesas artesanales de San Juan. Delivery y takeaway disponible.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#9D1309",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/logo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable any"
+    }
+  ],
+  "categories": ["food", "restaurant", "delivery"],
+  "lang": "es-AR",
+  "dir": "ltr"
+}

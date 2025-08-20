@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Footer, NavBarSecundary } from "../../components";
 import { useCartContext } from "../../context";
 import drinks from "../../DB/Drink";
+import { useSEO } from "../../hooks";
 import type { CartDrinkItem } from "../../types";
 
 function Cart() {
@@ -20,6 +21,16 @@ function Cart() {
   const [drinkQuantities, setDrinkQuantities] = useState<
     Record<number, number>
   >({});
+
+  // SEO para página del carrito
+  useSEO({
+    title: `Carrito de Compras (${getTotalItems()} productos) - Bailey's Burger`,
+    description:
+      "Revisa tu pedido en Bailey's Burger. Hamburguesas artesanales, papas fritas y pachatas listas para delivery o takeaway en San Juan.",
+    keywords:
+      "carrito compras, pedido baileys burger, checkout hamburguesas, delivery san juan",
+    canonical: "https://baileysburger.com/cart",
+  });
 
   // Inicializar las cantidades de bebidas basándose en el carrito actual
   useEffect(() => {

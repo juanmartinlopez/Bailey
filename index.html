@@ -1,10 +1,82 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es-AR">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/png" href="/logo.png" />
+    <link rel="manifest" href="/manifest.json" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Bailey's Burger</title>
+    <meta name="theme-color" content="#9D1309" />
+
+    <!-- SEO Meta Tags -->
+    <title>
+      Bailey's Burger - Las mejores hamburguesas artesanales de San Juan
+    </title>
+    <meta
+      name="description"
+      content="Bailey's Burger - Hamburguesas artesanales smash, papas fritas y pachatas en San Juan, Argentina. Delivery y takeaway disponible. ¡Pedí online ahora!"
+    />
+    <meta
+      name="keywords"
+      content="hamburguesas, san juan, argentina, delivery, smash burger, papas fritas, pachatas, comida rapida, takeaway"
+    />
+    <meta name="author" content="Bailey's Burger" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://baileysburger.com/" />
+    <meta
+      property="og:title"
+      content="Bailey's Burger - Las mejores hamburguesas artesanales de San Juan"
+    />
+    <meta
+      property="og:description"
+      content="Hamburguesas artesanales smash, papas fritas y pachatas en San Juan, Argentina. Delivery y takeaway disponible."
+    />
+    <meta property="og:image" content="/logo.png" />
+    <meta property="og:locale" content="es_AR" />
+    <meta property="og:site_name" content="Bailey's Burger" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://baileysburger.com/" />
+    <meta
+      property="twitter:title"
+      content="Bailey's Burger - Las mejores hamburguesas artesanales de San Juan"
+    />
+    <meta
+      property="twitter:description"
+      content="Hamburguesas artesanales smash, papas fritas y pachatas en San Juan, Argentina. Delivery y takeaway disponible."
+    />
+    <meta property="twitter:image" content="/logo.png" />
+
+    <!-- Local Business Schema -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Restaurant",
+        "name": "Bailey's Burger",
+        "description": "Restaurante de hamburguesas artesanales en San Juan, Argentina",
+        "url": "https://baileysburger.com",
+        "telephone": "+54-264-484-2028",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "San Juan",
+          "addressLocality": "San Juan",
+          "addressCountry": "AR"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": -31.536917,
+          "longitude": -68.525148
+        },
+        "priceRange": "$",
+        "servesCuisine": "Hamburguesas",
+        "acceptsReservations": false,
+        "hasDeliveryService": true,
+        "hasTakeAway": true
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>

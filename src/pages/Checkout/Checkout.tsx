@@ -4,6 +4,7 @@ import Swal from "sweetalert2";
 import { Footer, NavBarSecundary } from "../../components";
 import { useCartContext } from "../../context";
 import bailey from "../../DB/Bailey";
+import { useSEO } from "../../hooks";
 
 type DeliveryType = "delivery" | "pickup";
 type PaymentMethod = "Mercado Pago" | "Efectivo";
@@ -23,6 +24,16 @@ function Checkout() {
   const [deliveryInfo, setDeliveryInfo] = useState<DeliveryInfo>({
     recipientName: "",
     comment: "",
+  });
+
+  // SEO para página de checkout
+  useSEO({
+    title: `Finalizar Pedido - Bailey's Burger San Juan`,
+    description:
+      "Completa tu pedido en Bailey's Burger. Elige delivery o takeaway, método de pago y finaliza tu compra de hamburguesas artesanales en San Juan.",
+    keywords:
+      "checkout baileys burger, finalizar pedido, delivery san juan, pago hamburguesas",
+    canonical: "https://baileysburger.com/checkout",
   });
 
   // Redirigir si el carrito queda vacío (evita navegar durante el render)

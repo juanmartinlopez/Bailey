@@ -1,9 +1,19 @@
 import { PiHamburgerFill } from "react-icons/pi";
 import { useNavigate } from "react-router-dom";
 import { Footer, NavBar } from "../../components";
+import { useSEO } from "../../hooks";
 
 function Error() {
   const navigate = useNavigate();
+
+  // SEO para página de error
+  useSEO({
+    title: "Página no encontrada - Bailey's Burger",
+    description:
+      "Lo sentimos, la página que buscas no existe. Regresa al inicio para ver nuestro menú de hamburguesas artesanales en Bailey's Burger.",
+    keywords: "error 404, pagina no encontrada, baileys burger",
+    canonical: "https://baileysburger.com/404",
+  });
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-orange-50 to-red-50">

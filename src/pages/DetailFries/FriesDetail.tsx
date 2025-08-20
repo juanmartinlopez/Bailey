@@ -6,6 +6,7 @@ import NavBarSecundary from "../../components/NavBarSecundary/NavBarSecundary";
 import { useCartContext } from "../../context";
 import addons from "../../DB/Addons";
 import fries from "../../DB/Fries";
+import { useSEO } from "../../hooks";
 import type { Fries } from "../../types";
 
 function FriesDetail() {
@@ -30,6 +31,20 @@ function FriesDetail() {
       }
     }
   }, [id, navigate]);
+
+  // SEO dinámico basado en las papas fritas
+  useSEO({
+    title: friesItem
+      ? `${friesItem.name} - Papas Fritas Bailey's Burger San Juan`
+      : "Papas Fritas - Bailey's Burger",
+    description: friesItem
+      ? `Deliciosas papas fritas ${friesItem.name} en Bailey's Burger, San Juan. Crujientes y perfectas para acompañar. Delivery y takeaway. $${friesItem.price}.`
+      : "Papas fritas crujientes y deliciosas en Bailey's Burger, San Juan.",
+    keywords: friesItem
+      ? `${friesItem.name}, papas fritas san juan, papas crujientes, delivery papas, baileys burger`
+      : "papas fritas, san juan, delivery",
+    canonical: `https://baileysburger.com/fries/${id}`,
+  });
 
   const getCurrentPrice = () => {
     if (!friesItem) return 0;
