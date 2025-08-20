@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { Footer, NavBarSecundary } from "../../components";
 import { useCartContext } from "../../context";
+import bailey from "../../DB/Bailey";
 
 type DeliveryType = "delivery" | "pickup";
 type PaymentMethod = "Mercado Pago" | "Efectivo";
@@ -136,7 +137,7 @@ function Checkout() {
     )}\n\n${addressPart}\nMétodo de pago: ${paymentMethod}\nTotal: $${total}`;
 
     // Número de teléfono del local (formato internacional sin + ni espacios). Ajustar según corresponda.
-    const phoneNumber = "542645704903"; // TODO: reemplazar por número real
+    const phoneNumber = bailey.phone; // TODO: reemplazar por número real
     const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(
       message
     )}`;

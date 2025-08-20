@@ -3,7 +3,7 @@ const burgers = {
     id: 1,
     name: "Cheese Burger",
     description:
-      "Smash burger de blend de carne vacuna, cheddar, salsa bailey’s y pan brioche.",
+      "Smash burger de blend de carne vacuna, cheddar, salsa bailey’s y pan de papa.",
     image: "",
     priceSimple: 7100,
     priceDoble: 8700,
@@ -13,7 +13,7 @@ const burgers = {
     id: 2,
     name: "Bacon Cheeseburger",
     description:
-      "Smash burger de blend de carne vacuna, cheddar, bacon, salsa bailey’s y pan brioche.",
+      "Smash burger de blend de carne vacuna, cheddar, bacon, salsa bailey’s y pan de papa.",
     image: "",
     priceSimple: 7900,
     priceDoble: 9600,
@@ -23,7 +23,7 @@ const burgers = {
     id: 3,
     name: "Oklahoma burger",
     description:
-      "Smash burger de blend de carne vacuna, cebollita smasheada, cheddar, salsa bailey’s y pan brioche.",
+      "Smash burger de blend de carne vacuna, cebollita smasheada, cheddar, salsa bailey’s y pan de papa.",
     image: "",
     priceSimple: 7400,
     priceDoble: 9100,
@@ -33,7 +33,7 @@ const burgers = {
     id: 4,
     name: "American burger",
     description:
-      "Smash burger de blend de carne vacuna, tomate, lechuga, pepinillos, cheddar, salsa bailey’s y pan brioche.",
+      "Smash burger de blend de carne vacuna, tomate, lechuga, pepinillos, cheddar, salsa bailey’s y pan de papa.",
     image: "",
     priceSimple: 7600,
     priceDoble: 9300,
@@ -43,7 +43,7 @@ const burgers = {
     id: 5,
     name: "Bailey's Burger",
     description:
-      "Smash burger de blend de carne vacuna, huevo, bacon, BBQ, cheddar y pan brioche.",
+      "Smash burger de blend de carne vacuna, huevo, bacon, BBQ, cheddar y pan de papa.",
     image: "",
     priceSimple: 8200,
     priceDoble: 9900,

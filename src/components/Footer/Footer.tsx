@@ -1,5 +1,6 @@
 import { FiPhone } from "react-icons/fi";
 import { LuMapPin } from "react-icons/lu";
+import bailey from "../../DB/Bailey";
 
 function Footer() {
   return (
@@ -9,11 +10,11 @@ function Footer() {
         <div>
           <div className="flex items-center justify-center mb-1">
             <FiPhone className="mr-2" />
-            <p className="text-sm">264 484-2028</p>
+            <p className="text-sm">+{bailey.phone}</p>
           </div>
           <div className="flex items-center justify-center">
             <LuMapPin className="mr-2" />
-            <p className="text-sm">San Juan, Argentina</p>
+            <p className="text-sm">{bailey.address}</p>
           </div>
         </div>
       </div>
