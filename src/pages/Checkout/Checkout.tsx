@@ -47,10 +47,7 @@ function Checkout() {
 
   const subtotal = getTotalPrice();
 
-  // Precio fijo de delivery o gratis para retiro
-  const deliveryFee = deliveryType === "delivery" ? 200 : 0;
-
-  const total = subtotal + deliveryFee;
+  const total = subtotal;
 
   const handleDeliveryTypeChange = (type: DeliveryType) => {
     setDeliveryType(type);
@@ -141,7 +138,7 @@ function Checkout() {
             deliveryInfo.comment ? `Comentarios: ${deliveryInfo.comment}\n` : ""
           }`;
 
-    const total = getTotalPrice() + (deliveryType === "delivery" ? 200 : 0);
+    const total = getTotalPrice();
 
     const message = `Hola, quiero pedir:\n${lines.join(
       "\n"
@@ -149,6 +146,7 @@ function Checkout() {
 
     // Número de teléfono del local (formato internacional sin + ni espacios). Ajustar según corresponda.
     const phoneNumber = bailey.phone; // TODO: reemplazar por número real
+    //const phoneNumber = 542645704903;
     const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(
       message
     )}`;
