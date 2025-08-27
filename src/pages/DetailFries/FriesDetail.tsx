@@ -136,45 +136,45 @@ function FriesDetail() {
 
       {/* Content */}
       <div className="bg-white min-h-[80vh]">
-        <div className="max-w-4xl mx-auto">
-          <div className="md:flex md:gap-8 rounded-3xl">
-            {/* Imagen de las papas */}
-            {/* <div className="w-full md:w-1/2 h-80 md:h-96 bg-gradient-to-br from-yellow-400 to-orange-500 flex items-center justify-center md:rounded-3xl">
-              <div className="text-9xl">🍟</div>
-            </div> */}
+        <div className="w-full">
+          {/* H1 accesible (ya existe uno visible con el nombre del producto, este actúa como fallback semántico general y no se renderiza si el visible se considera válido) */}
+          <h1 className="sr-only">
+            Papas fritas artesanales – Pedido online Bailey's Burger San Juan
+          </h1>
+          <div className="max-w-3xl mx-auto px-4 py-8 md:py-12">
+            {/* Contenedor principal (en caso de agregar imagen futura) */}
+            <div className="flex flex-col gap-6">
+              {/* Información del producto */}
+              <div>
+                <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
+                  {friesItem.name}
+                </h1>
+                <p className="text-secundary-red text-sm md:text-base mb-6">
+                  Papas fritas crujientes
+                </p>
+                {/* Comentario especial */}
+                <div className="mb-6">
+                  <h2 className="text-lg md:text-xl font-semibold text-gray-900 mb-3">
+                    Comentario especial
+                  </h2>
+                  <textarea
+                    value={comment}
+                    onChange={(e) => setComment(e.target.value)}
+                    placeholder="¿Alguna especificación especial? (ej: sin sal, papas bien doradas, etc.)"
+                    className="w-full p-4 border-2 border-gray-300 rounded-lg focus:border-primary-red focus:ring-2 focus:ring-primary-red focus:ring-opacity-50 transition-colors resize-none min-h-[120px] md:min-h-[140px]"
+                  />
+                </div>
 
-            {/* Información del producto */}
-            <div className="p-6 md:w-1/2 md:p-8">
-              <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
-                {friesItem.name}
-              </h1>
-              <p className="text-secundary-red text-sm md:text-base mb-6">
-                Papas fritas crujientes
-              </p>
-
-              {/* Comentario especial */}
-              <div className="mb-6">
-                <h2 className="text-lg md:text-xl font-semibold text-gray-900 mb-4">
-                  Comentario especial
-                </h2>
-                <textarea
-                  value={comment}
-                  onChange={(e) => setComment(e.target.value)}
-                  placeholder="¿Alguna especificación especial? (ej: sin sal, papas bien doradas, etc.)"
-                  className="w-full p-3 border-2 border-gray-300 rounded-lg focus:border-primary-red focus:ring-2 focus:ring-primary-red focus:ring-opacity-50 transition-colors resize-none"
-                  rows={3}
-                />
-              </div>
-
-              {/* Botón agregar al carrito */}
-              <div className="flex justify-end">
-                <button
-                  onClick={handleAddToCart}
-                  className="bg-secundary-red text-white px-6 py-3 rounded-lg font-medium hover:bg-primary-red transition-colors w-full sm:w-auto"
-                >
-                  <p>Agregar al carrito</p>
-                  <p>${getCurrentPrice()}</p>
-                </button>
+                {/* Botón agregar al carrito */}
+                <div className="flex justify-end pt-2">
+                  <button
+                    onClick={handleAddToCart}
+                    className="bg-secundary-red text-white px-6 py-4 rounded-lg font-medium hover:bg-primary-red transition-colors w-full md:w-auto text-center space-y-1"
+                  >
+                    <p>Agregar al carrito</p>
+                    <p className="font-semibold">${getCurrentPrice()}</p>
+                  </button>
+                </div>
               </div>
             </div>
           </div>

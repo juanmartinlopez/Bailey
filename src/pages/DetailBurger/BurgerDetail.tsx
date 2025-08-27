@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
-import { Breadcrumbs, Footer } from "../../components";
+import { Footer } from "../../components";
 import NavBarSecundary from "../../components/NavBarSecundary/NavBarSecundary";
 import { useCartContext } from "../../context";
 import addons from "../../DB/Addons";
@@ -168,18 +168,13 @@ function BurgerDetail() {
       {/* Header */}
       <NavBarSecundary />
 
-      {/* Breadcrumbs */}
-      <Breadcrumbs
-        customBreadcrumbs={[
-          { label: "Inicio", path: "/" },
-          { label: "Hamburguesas", path: "/burger" },
-          { label: burger.name, path: `/burger/${id}` },
-        ]}
-      />
-
       {/* Content */}
       <div className="bg-white min-h-[80vh]">
-        <div className="max-w-4xl mx-auto">
+        <div className="flex items-center justify-center">
+          {/* H1 oculto para SEO complementario al título específico */}
+          <h1 className="sr-only">
+            Hamburguesas artesanales – Pedido online Bailey's Burger San Juan
+          </h1>
           <div className="md:flex md:gap-8">
             {/* Imagen de la hamburguesa */}
             {/* <div className="w-full md:w-1/2 h-80 md:h-96 bg-gray-900 flex items-center justify-center md:rounded-3xl">
@@ -191,7 +186,7 @@ function BurgerDetail() {
             </div> */}
 
             {/* Información del producto */}
-            <div className="p-6 md:w-1/2 md:p-8">
+            <div className="p-6">
               <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
                 {burger.name}
               </h1>

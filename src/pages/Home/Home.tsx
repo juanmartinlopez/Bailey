@@ -17,6 +17,11 @@ function Home() {
     <div className="min-h-screen">
       <NavBar />
       <main className="container mx-auto min-h-[80vh]">
+        {/* H1 accesible para SEO, oculto visualmente para no alterar el diseño */}
+        <h1 className="sr-only">
+          Bailey's Burger San Juan – Pedí online hamburguesas smash artesanales,
+          papas fritas y pachatas con delivery
+        </h1>
         <Cards />
       </main>
       <Footer />
