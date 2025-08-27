@@ -43,6 +43,11 @@ function Checkout() {
     }
   }, [cart.length, navigate]);
 
+  // Al montar la página, forzar scroll al inicio
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+  }, []);
+
   if (cart.length === 0) return null;
 
   const subtotal = getTotalPrice();
