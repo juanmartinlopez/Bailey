@@ -1,7 +1,7 @@
 const burgers = {
   1: {
     id: 1,
-    name: "Cheese Burger",
+    name: "Cheese Burgers",
     description:
       "Smash burger de blend de carne vacuna, cheddar, salsa bailey’s y pan de papa.",
     image: "",
