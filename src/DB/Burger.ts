@@ -92,7 +92,7 @@ const burgers = {
   },
  10: { 
    id: 9,
-   name: "smoky burger",
+   name: "Smoky burger",
      description:
        "smash burger de blen de carne vacuna, cheddar, verduritas asadas, mayo de ajo asado, bacon y pan de papa.",
    image: "",
