@@ -99,6 +99,8 @@ const burgers = {
    priceSimple: 9000,
    priceDoble: 10700,
    priceTriple: 12400,
+ },
+  }
    
    
 
