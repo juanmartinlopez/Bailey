@@ -90,6 +90,16 @@ const burgers = {
     priceDoble: 10200,
     priceTriple: 11900,
   },
-};
+ 10: { 
+   id: 9,
+   name: "smoky burger",
+     description:
+       "smash burger de blen de carne vacuna, cheddar, verduritas asadas, mayo de ajo asado, bacon y pan de papa.",
+   image: "",
+   priceSimple: 9000,
+   priceDoble: 10700,
+   priceTriple: 12400,
+   
+   
 
 export default burgers;
