@@ -10,6 +10,8 @@ const fries = {
     name: "Papa fritas Grandes",
     price: 6200,
     image: "",
+  },
+};
   
   
 
