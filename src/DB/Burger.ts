@@ -5,9 +5,9 @@ const burgers = {
     description:
       "Smash burger de blend de carne vacuna, cheddar, salsa bailey’s y pan de papa.",
     image: "",
-    priceSimple: 7600,
-    priceDoble: 10500,
-    priceTriple: 13000,
+    priceSimple: 8600,
+    priceDoble: 11500,
+    priceTriple: 14000,
   },
   2: {
     id: 2,
@@ -15,8 +15,8 @@ const burgers = {
     description:
       "Smash burger de blend de carne vacuna, cheddar, bacon, salsa bailey’s y pan de papa.",
     image: "",
-    priceSimple: 8400,
-    priceDoble: 12000,
+    priceSimple: 9400,
+    priceDoble: 13000,
     priceTriple: 15000,
   },
   3: {
@@ -25,9 +25,9 @@ const burgers = {
     description:
       "Smash burger de blend de carne vacuna, cebollita smasheada, cheddar, salsa bailey’s y pan de papa.",
     image: "",
-    priceSimple: 7900,
-    priceDoble: 10800,
-    priceTriple: 14400,
+    priceSimple: 8900,
+    priceDoble: 11800,
+    priceTriple: 15400,
   },
   4: {
     id: 4,
@@ -35,8 +35,8 @@ const burgers = {
     description:
       "Smash burger de blend de carne vacuna, tomate, lechuga, pepinillos, cheddar, salsa bailey’s y pan de papa.",
     image: "",
-    priceSimple: 8700,
-    priceDoble: 12000,
+    priceSimple: 9700,
+    priceDoble: 13000,
     priceTriple: 15000,
   },
   5: {
@@ -45,8 +45,8 @@ const burgers = {
     description:
       "Smash burger de blend de carne vacuna, huevo, bacon, BBQ, cheddar y pan de papa.",
     image: "",
-    priceSimple: 8800,
-    priceDoble: 12300,
+    priceSimple: 9800,
+    priceDoble: 13300,
     priceTriple: 15000,
   },
   6: {
@@ -56,8 +56,8 @@ const burgers = {
       "Smash burger de carne vacuna, cebolla, crispy, bacon, BBQ, cheddar, queso tybo y pan de papa.",
 
     image: "",
-    priceSimple: 9000,
-    priceDoble: 12500,
+    priceSimple: 10000,
+    priceDoble: 13500,
     priceTriple: 15000,
   },
   7: {
@@ -66,8 +66,8 @@ const burgers = {
     description:
       "Smash burger de blend de carne vacuna, mermelada de pimientos levemente picante, cheddar y pan de papa.",
     image: "",
-    priceSimple: 8600,
-    priceDoble: 11800,
+    priceSimple: 9600,
+    priceDoble: 12800,
     priceTriple: 15200,
   },
   8: {
@@ -76,8 +76,8 @@ const burgers = {
     description:
       "Smash burger de blend de carne vacuna, brunoise, cheddar, ketchup, mostaza y pan de papa.",
     image: "",
-    priceSimple: 7700,
-    priceDoble: 10000,
+    priceSimple: 8700,
+    priceDoble: 11000,
     priceTriple: 14000,
   },
   9: {
@@ -86,8 +86,8 @@ const burgers = {
     description:
       "Smash burger de blend de carne vacuna, cebolla caramelizada, cheddar, panceta, BBQ y pan de papa.",
     image: "",
-    priceSimple: 8600,
-    priceDoble: 12000,
+    priceSimple: 9600,
+    priceDoble: 13000,
     priceTriple: 15000,
   },
  10: { 
@@ -96,8 +96,8 @@ const burgers = {
      description:
        "smash burger de blen de carne vacuna, cheddar, verduritas asadas, mayo de ajo asado, bacon y pan de papa.",
    image: "",
-   priceSimple: 9900,
-   priceDoble: 13300,
+   priceSimple: 10900,
+   priceDoble: 14300,
    priceTriple: 15800,
  },
   }
