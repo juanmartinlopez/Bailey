@@ -7,7 +7,7 @@ const addons = {
   2: {
     id: 2,
     name: "Carne + cheddar x1",
-    price: 3000,
+    price: 4000,
   },
   3: {
     id: 3,
