@@ -6,13 +6,14 @@ import NavBarSecundary from "../../components/NavBarSecundary/NavBarSecundary";
 import { useCartContext } from "../../context";
 import addons from "../../DB/Addons";
 import pachatas from "../../DB/Pachata";
-import { useSEO } from "../../hooks";
+import { useBranch, useSEO } from "../../hooks";
 import type { Pachata } from "../../types";
 
 function PachataDetail() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const { addToCart } = useCartContext();
+  const { selectedBranch } = useBranch();
   const [pachata, setPachata] = useState<Pachata | null>(null);
   const [selectedAddons, setSelectedAddons] = useState<{
     [key: number]: boolean;
@@ -20,6 +21,16 @@ function PachataDetail() {
   const [comment, setComment] = useState<string>("");
 
   useEffect(() => {
+    if (!selectedBranch.availableProducts.pachata) {
+      void Swal.fire({
+        title: "Producto no disponible",
+        text: `Las pachatas no están disponibles en ${selectedBranch.name}.`,
+        icon: "warning",
+        confirmButtonColor: "#9D1309",
+      }).then(() => navigate("/"));
+      return;
+    }
+
     if (id) {
       const pachataId = parseInt(id);
       const foundPachata = pachatas[pachataId as keyof typeof pachatas];
@@ -30,7 +41,7 @@ function PachataDetail() {
         navigate("/");
       }
     }
-  }, [id, navigate]);
+  }, [id, navigate, selectedBranch]);
 
   // SEO dinámico basado en la pachata
   useSEO({

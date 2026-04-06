@@ -278,6 +278,13 @@ function calculateHaversineDistance(
   return R * c;
 }
 
+export function calculateDistanceKm(
+  coord1: LocationCoordinates,
+  coord2: LocationCoordinates
+): number {
+  return calculateHaversineDistance(coord1, coord2);
+}
+
 /**
  * Calcula el costo de envío basado en la distancia
  */

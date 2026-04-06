@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
+import { MdLocationOn, MdStorefront } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { Footer, NavBarSecundary } from "../../components";
-import { useCartContext } from "../../context";
-import bailey from "../../DB/Bailey";
-import { useSEO } from "../../hooks";
+import { getUnavailableCartItems, useCartContext } from "../../context";
+import { useBranch, useSEO } from "../../hooks";
 
 type DeliveryType = "delivery" | "pickup";
 type PaymentMethod = "Mercado Pago" | "Efectivo";
@@ -17,6 +17,8 @@ interface DeliveryInfo {
 function Checkout() {
   const navigate = useNavigate();
   const { cart, getTotalPrice, getTotalItems, clearCart } = useCartContext();
+  const { selectedBranch, distanceFromUserKm } = useBranch();
+  const unavailableItems = getUnavailableCartItems(cart, selectedBranch);
 
   const [deliveryType, setDeliveryType] = useState<DeliveryType>("delivery");
   const [paymentMethod, setPaymentMethod] =
@@ -86,6 +88,16 @@ function Checkout() {
   };
 
   const handleOrderSubmit = () => {
+    if (unavailableItems.length > 0) {
+      Swal.fire({
+        title: "Productos no disponibles",
+        text: "Tu carrito tiene productos que no están disponibles en esta sucursal. Cambiá de sucursal o ajustá tu pedido.",
+        icon: "warning",
+        confirmButtonColor: "#9D1309",
+      });
+      return;
+    }
+
     // Validar que siempre haya un nombre
     if (!deliveryInfo.recipientName) {
       Swal.fire({
@@ -147,11 +159,10 @@ function Checkout() {
 
     const message = `Hola, quiero pedir:\n${lines.join(
       "\n"
-    )}\n\n${addressPart}\nMétodo de pago: ${paymentMethod}\nTotal: $${total}`;
+    )}\n\nSucursal: ${selectedBranch.name}\n${addressPart}\nMétodo de pago: ${paymentMethod}\nTotal: $${total}`;
 
     // Número de teléfono del local (formato internacional sin + ni espacios). Ajustar según corresponda.
-    const phoneNumber = bailey.phone; // TODO: reemplazar por número real
-    //const phoneNumber = 542645704903;
+    const phoneNumber = selectedBranch.phone;
     const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(
       message
     )}`;
@@ -187,6 +198,22 @@ function Checkout() {
             <div className="space-y-6">
               {/* Tipo de entrega */}
               {/* Método de pago */}
+              <div className="bg-white rounded-lg shadow-md p-6">
+                <div className="flex items-center gap-2 mb-2">
+                  <MdStorefront className="text-primary-red text-xl" />
+                  <h2 className="text-xl font-bold text-gray-900">Sucursal</h2>
+                </div>
+
+                <p className="text-gray-800 font-semibold">{selectedBranch.name}</p>
+                {distanceFromUserKm !== null && (
+                  <p className="text-sm text-gray-500 mt-1 flex items-center gap-1">
+                    <MdLocationOn className="text-primary-red" />
+                    Distancia aproximada: {distanceFromUserKm.toFixed(1)} km
+                  </p>
+                )}
+                <p className="text-sm text-gray-500">{selectedBranch.address}</p>
+              </div>
+
               <div className="bg-white rounded-lg shadow-md p-6">
                 <h2 className="text-xl font-bold text-gray-900 mb-4">
                   Método de pago
@@ -319,6 +346,19 @@ function Checkout() {
 
             {/* Columna derecha - Resumen del pedido */}
             <div className="space-y-6">
+              {unavailableItems.length > 0 && (
+                <div className="bg-amber-50 border border-amber-300 rounded-lg p-4">
+                  <p className="font-semibold text-amber-800 mb-1">
+                    Productos no disponibles en {selectedBranch.name}
+                  </p>
+                  <p className="text-sm text-amber-700">
+                    {unavailableItems
+                      .map((item) => item.product.name)
+                      .join(", ")}
+                  </p>
+                </div>
+              )}
+
               <div className="bg-white rounded-lg shadow-md p-6">
                 <h2 className="text-xl font-bold text-gray-900 mb-4">
                   Resumen del pedido ({getTotalItems()}{" "}
@@ -388,7 +428,8 @@ function Checkout() {
                 {/* Botón de realizar pedido */}
                 <button
                   onClick={handleOrderSubmit}
-                  className="w-full mt-6 bg-secundary-red text-white py-3 px-4 rounded-lg font-medium hover:bg-red-700 transition-colors"
+                  disabled={unavailableItems.length > 0}
+                  className="w-full mt-6 bg-secundary-red text-white py-3 px-4 rounded-lg font-medium hover:bg-red-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   Finalizar y Enviar por WhatsApp
                 </button>

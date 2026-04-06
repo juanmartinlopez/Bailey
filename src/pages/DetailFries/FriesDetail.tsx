@@ -6,13 +6,14 @@ import NavBarSecundary from "../../components/NavBarSecundary/NavBarSecundary";
 import { useCartContext } from "../../context";
 import addons from "../../DB/Addons";
 import fries from "../../DB/Fries";
-import { useSEO } from "../../hooks";
+import { useBranch, useSEO } from "../../hooks";
 import type { Fries } from "../../types";
 
 function FriesDetail() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const { addToCart } = useCartContext();
+  const { selectedBranch } = useBranch();
   const [friesItem, setFriesItem] = useState<Fries | null>(null);
   const [selectedAddons, setSelectedAddons] = useState<{
     [key: number]: boolean;
@@ -20,6 +21,16 @@ function FriesDetail() {
   const [comment, setComment] = useState<string>("");
 
   useEffect(() => {
+    if (!selectedBranch.availableProducts.fries) {
+      void Swal.fire({
+        title: "Producto no disponible",
+        text: `Las papas fritas no están disponibles en ${selectedBranch.name}.`,
+        icon: "warning",
+        confirmButtonColor: "#9D1309",
+      }).then(() => navigate("/"));
+      return;
+    }
+
     if (id) {
       const friesId = parseInt(id);
       const foundFries = fries[friesId as keyof typeof fries];
@@ -30,7 +41,7 @@ function FriesDetail() {
         navigate("/");
       }
     }
-  }, [id, navigate]);
+  }, [id, navigate, selectedBranch]);
 
   // SEO dinámico basado en las papas fritas
   useSEO({
