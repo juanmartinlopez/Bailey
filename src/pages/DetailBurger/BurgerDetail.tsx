@@ -162,7 +162,7 @@ function BurgerDetail() {
       </div>
     );
   }
-
+  console.log(burger);
   return (
     <div>
       {/* Header */}
@@ -200,36 +200,44 @@ function BurgerDetail() {
                   Elegir tamaño
                 </h2>
                 <div className="flex gap-3 justify-around">
-                  <button
-                    onClick={() => setSelectedSize("Simple")}
-                    className={`px-6 py-2 rounded-full border-2 transition-colors ${
-                      selectedSize === "Simple"
-                        ? "border-primary-red text-primary-red bg-red-50"
-                        : "border-gray-300 text-gray-700 bg-white"
-                    }`}
-                  >
-                    Simple
-                  </button>
-                  <button
-                    onClick={() => setSelectedSize("Doble")}
-                    className={`px-6 py-2 rounded-full border-2 transition-colors ${
-                      selectedSize === "Doble"
-                        ? "border-primary-red text-primary-red bg-red-50"
-                        : "border-gray-300 text-gray-700 bg-white"
-                    }`}
-                  >
-                    Doble
-                  </button>
-                  <button
-                    onClick={() => setSelectedSize("Triple")}
-                    className={`px-6 py-2 rounded-full border-2 transition-colors ${
-                      selectedSize === "Triple"
-                        ? "border-primary-red text-primary-red bg-red-50"
-                        : "border-gray-300 text-gray-700 bg-white"
-                    }`}
-                  >
-                    Triple
-                  </button>
+                  {burger.priceSimple && (
+                    <button
+                      onClick={() => setSelectedSize("Simple")}
+                      className={`px-6 py-2 rounded-full border-2 transition-colors ${
+                        selectedSize === "Simple"
+                          ? "border-primary-red text-primary-red bg-red-50"
+                          : "border-gray-300 text-gray-700 bg-white"
+                      }`}
+                    >
+                      Simple
+                    </button>
+                  )}
+
+                  {burger.priceDoble && (
+                    <button
+                      onClick={() => setSelectedSize("Doble")}
+                      className={`px-6 py-2 rounded-full border-2 transition-colors ${
+                        selectedSize === "Doble"
+                          ? "border-primary-red text-primary-red bg-red-50"
+                          : "border-gray-300 text-gray-700 bg-white"
+                      }`}
+                    >
+                      Doble
+                    </button>
+                  )}
+
+                  {burger.priceTriple && (
+                    <button
+                      onClick={() => setSelectedSize("Triple")}
+                      className={`px-6 py-2 rounded-full border-2 transition-colors ${
+                        selectedSize === "Triple"
+                          ? "border-primary-red text-primary-red bg-red-50"
+                          : "border-gray-300 text-gray-700 bg-white"
+                      }`}
+                    >
+                      Triple
+                    </button>
+                  )}
                 </div>
               </div>
 

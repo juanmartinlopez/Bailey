@@ -65,7 +65,7 @@ function parseCoordinatesString(address: string): LocationCoordinates | null {
  * - Mejora la precisión con múltiples estrategias de búsqueda
  */
 export async function getCoordinatesFromAddress(
-  address: string
+  address: string,
 ): Promise<LocationCoordinates> {
   // 0. Si es un par de coordenadas, devolver directamente
   const coordsDirect = parseCoordinatesString(address);
@@ -95,7 +95,7 @@ export async function getCoordinatesFromAddress(
     console.log(`🔍 Intentando estrategia ${i + 1}: ${searchAddress}`);
 
     const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(
-      searchAddress
+      searchAddress,
     )}&limit=3&addressdetails=1&polygon_geojson=0&countrycodes=ar`;
 
     try {
@@ -108,7 +108,7 @@ export async function getCoordinatesFromAddress(
             "Accept-Language": "es,en;q=0.8",
           },
         },
-        8000
+        8000,
       );
 
       if (!response.ok) {
@@ -137,7 +137,7 @@ export async function getCoordinatesFromAddress(
           lng <= -68.2; // Rango más amplio para San Juan (-68.5 aprox)
 
         console.log(
-          `🔍 Verificando: lat=${lat}, lng=${lng}, inBounds=${inSanJuanBounds}, hasArg=${hasArgentina}`
+          `🔍 Verificando: lat=${lat}, lng=${lng}, inBounds=${inSanJuanBounds}, hasArg=${hasArgentina}`,
         );
 
         return hasArgentina && inSanJuanBounds;
@@ -159,12 +159,12 @@ export async function getCoordinatesFromAddress(
       }
 
       console.warn(
-        `⚠️ Estrategia ${i + 1} no tiene resultados válidos en San Juan`
+        `⚠️ Estrategia ${i + 1} no tiene resultados válidos en San Juan`,
       );
     } catch (error: unknown) {
       console.warn(
         `❌ Error en estrategia ${i + 1}:`,
-        error instanceof Error ? error.message : String(error)
+        error instanceof Error ? error.message : String(error),
       );
       lastError = error instanceof Error ? error : new Error(String(error));
 
@@ -173,7 +173,7 @@ export async function getCoordinatesFromAddress(
         console.log("🔄 Intentando servicio alternativo...");
         try {
           const altUrl = `https://geocode.maps.co/search?q=${encodeURIComponent(
-            searchAddress
+            searchAddress,
           )}&limit=1`;
           const altRes = await fetchWithTimeout(altUrl, {}, 5000);
           if (altRes.ok) {
@@ -193,7 +193,7 @@ export async function getCoordinatesFromAddress(
               ) {
                 console.log(
                   "✅ Encontrado con servicio alternativo:",
-                  altResult
+                  altResult,
                 );
                 geocodeCache.set(cacheKey, altResult);
                 return altResult;
@@ -215,7 +215,7 @@ export async function getCoordinatesFromAddress(
   throw new Error(
     lastError?.name === "AbortError"
       ? "Timeout al buscar la dirección. Por favor, intenta de nuevo."
-      : `No se pudo encontrar la dirección "${address}" en San Juan. Verifica que la calle y número sean correctos.`
+      : `No se pudo encontrar la dirección "${address}" en San Juan. Verifica que la calle y número sean correctos.`,
   );
 }
 
@@ -225,7 +225,7 @@ export async function getCoordinatesFromAddress(
  */
 export async function calculateRealDistance(
   store: LocationCoordinates,
-  client: LocationCoordinates
+  client: LocationCoordinates,
 ): Promise<number> {
   // OSRM usa formato longitude,latitude (no latitude,longitude)
   const url = `https://router.project-osrm.org/route/v1/driving/${store.lng},${store.lat};${client.lng},${client.lat}?overview=false&steps=false`;
@@ -261,7 +261,7 @@ export async function calculateRealDistance(
  */
 function calculateHaversineDistance(
   coord1: LocationCoordinates,
-  coord2: LocationCoordinates
+  coord2: LocationCoordinates,
 ): number {
   const R = 6371; // Radio de la Tierra en kilómetros
   const dLat = ((coord2.lat - coord1.lat) * Math.PI) / 180;
@@ -282,12 +282,12 @@ function calculateHaversineDistance(
  * Calcula el costo de envío basado en la distancia
  */
 export function calculateDeliveryPrice(
-  distance: number
+  distance: number,
 ): DeliveryCalculation | null {
   const zone = deliveryZones.find(
     (zone) =>
       distance >= (zone.minDistance || 0) &&
-      distance <= (zone.maxDistance || Infinity)
+      distance <= (zone.maxDistance || Infinity),
   );
 
   if (!zone) {
@@ -306,7 +306,7 @@ export function calculateDeliveryPrice(
  * Usa OpenStreetMap (GRATIS) en lugar de Google Maps
  */
 export async function calculateFullDelivery(
-  address: string
+  address: string,
 ): Promise<DeliveryCalculation | null> {
   try {
     console.log(`🚀 Calculando envío para: ${address}`);
@@ -326,7 +326,7 @@ export async function calculateFullDelivery(
       // Fallback: usar Haversine si OSRM falla
       distance = calculateHaversineDistance(STORE_LOCATION, clientCoordinates);
       console.log(
-        `📐 Distancia Haversine (fallback): ${distance.toFixed(2)} km`
+        `📐 Distancia Haversine (fallback): ${distance.toFixed(2)} km`,
       );
     }
 
@@ -335,11 +335,11 @@ export async function calculateFullDelivery(
 
     if (deliveryCalculation) {
       console.log(
-        `💰 Costo calculado: $${deliveryCalculation.price} (${deliveryCalculation.zone.name})`
+        `💰 Costo calculado: $${deliveryCalculation.price} (${deliveryCalculation.zone.name})`,
       );
     } else {
       console.log(
-        `🚫 Fuera del área de entrega (${distance.toFixed(2)} km > 10 km)`
+        `🚫 Fuera del área de entrega (${distance.toFixed(2)} km > 10 km)`,
       );
     }
 
@@ -355,7 +355,7 @@ export async function calculateFullDelivery(
  * (compatible con el código existente)
  */
 export async function calculateDelivery(
-  address: string
+  address: string,
 ): Promise<{ km: number; price: number | null }> {
   const result = await calculateFullDelivery(address);
 
@@ -370,7 +370,7 @@ export async function calculateDelivery(
       const clientCoordinates = await getCoordinatesFromAddress(address);
       const distance = calculateHaversineDistance(
         STORE_LOCATION,
-        clientCoordinates
+        clientCoordinates,
       );
       return {
         km: distance,
