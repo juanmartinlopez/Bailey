@@ -68,7 +68,7 @@ function BurgerDetail() {
         basePrice = burger.priceDoble;
         break;
       case "Triple":
-        basePrice = burger.priceTriple;
+        basePrice = burger.priceTriple ?? burger.priceDoble;
         break;
       default:
         basePrice = burger.priceSimple;

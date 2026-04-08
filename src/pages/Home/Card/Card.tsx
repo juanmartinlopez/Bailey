@@ -60,9 +60,11 @@ function Card({ item, category }: CardProps) {
           <p className="text-sm text-text-light">
             <span className="font-medium">Doble:</span> ${burger.priceDoble}
           </p>
-          <p className="text-sm text-text-light">
-            <span className="font-medium">Triple:</span> ${burger.priceTriple}
-          </p>
+          {burger.priceTriple && (
+            <p className="text-sm text-text-light">
+              <span className="font-medium">Triple:</span> ${burger.priceTriple}
+            </p>
+          )}
         </div>
       );
     } else {
