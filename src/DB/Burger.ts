@@ -102,7 +102,7 @@ const burgers = {
   },
   11: {
     id: 11,
-    name: "Pretzel Avocado",
+    name: "Pretzel Avocado NO DISPONIBLE",
     description:
       "Carne smash, cebolla morada, palta, tomate, huevo, queso tybo, pan pretzel y salsa bailey’s.",
     image: "",
