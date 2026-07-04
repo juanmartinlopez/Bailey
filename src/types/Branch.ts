@@ -19,6 +19,7 @@ export interface Branch {
   phone: string;
   lat: number;
   lng: number;
+  mapsUrl: string;
   hours: BranchHours;
   availableProducts: BranchAvailability;
 }
