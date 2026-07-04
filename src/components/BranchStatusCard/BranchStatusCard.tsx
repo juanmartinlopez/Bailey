@@ -1,6 +1,7 @@
 import { MdLocationOn, MdStorefront } from "react-icons/md";
 import { useCartContext } from "../../context";
 import { useBranch } from "../../hooks";
+import type { BranchHours } from "../../types";
 
 const BUE_TIME_ZONE = "America/Argentina/Buenos_Aires";
 
@@ -9,10 +10,11 @@ function parseMinutes(time: string) {
   return hours * 60 + minutes;
 }
 
-function getCurrentBuenosAiresMinutes() {
+function getCurrentBuenosAires() {
   const formatter = new Intl.DateTimeFormat("en-US", {
     timeZone: BUE_TIME_ZONE,
     hour12: false,
+    weekday: "short",
     hour: "2-digit",
     minute: "2-digit",
   });
@@ -20,17 +22,42 @@ function getCurrentBuenosAiresMinutes() {
   const parts = formatter.formatToParts(new Date());
   const hour = Number(parts.find((part) => part.type === "hour")?.value ?? 0);
   const minute = Number(parts.find((part) => part.type === "minute")?.value ?? 0);
+  const weekdayShort = parts.find((part) => part.type === "weekday")?.value ?? "Sun";
 
-  return hour * 60 + minute;
+  const weekdayMap: Record<string, number> = {
+    Sun: 0,
+    Mon: 1,
+    Tue: 2,
+    Wed: 3,
+    Thu: 4,
+    Fri: 5,
+    Sat: 6,
+  };
+
+  return {
+    minutes: hour * 60 + minute,
+    weekday: weekdayMap[weekdayShort] ?? 0,
+  };
 }
 
-function isBranchOpenNow(openAt: string, closeAt: string) {
-  const currentMinutes = getCurrentBuenosAiresMinutes();
-  const openMinutes = parseMinutes(openAt);
-  const closeMinutes = parseMinutes(closeAt);
+function isBranchOpenNow({ opensAt, closesAt, closedWeekdays }: BranchHours) {
+  const { minutes: currentMinutes, weekday } = getCurrentBuenosAires();
+  const openMinutes = parseMinutes(opensAt);
+  const closeMinutes = parseMinutes(closesAt);
+  const previousWeekday = (weekday + 6) % 7;
 
   if (closeMinutes <= openMinutes) {
-    return currentMinutes >= openMinutes || currentMinutes < closeMinutes;
+    if (currentMinutes >= openMinutes) {
+      return !closedWeekdays.includes(weekday);
+    }
+    if (currentMinutes < closeMinutes) {
+      return !closedWeekdays.includes(previousWeekday);
+    }
+    return false;
+  }
+
+  if (closedWeekdays.includes(weekday)) {
+    return false;
   }
 
   return currentMinutes >= openMinutes && currentMinutes < closeMinutes;
@@ -40,7 +67,7 @@ function BranchStatusCard() {
   const { cart } = useCartContext();
   const { branches, selectedBranch, distanceFromUserKm, changeBranch } = useBranch();
 
-  const branchIsOpen = isBranchOpenNow(selectedBranch.hours.opensAt, selectedBranch.hours.closesAt);
+  const branchIsOpen = isBranchOpenNow(selectedBranch.hours);
 
   const handleBranchChange = async (branchId: string) => {
     const nextBranch = branches.find((branch) => branch.id === branchId);
@@ -82,6 +109,7 @@ function BranchStatusCard() {
               <p>
                 {selectedBranch.hours.opensAt} a {selectedBranch.hours.closesAt}
               </p>
+              <p className="text-xs text-gray-500">{selectedBranch.hours.closedDaysLabel}</p>
             </div>
           </div>
           <div className="flex gap-3">

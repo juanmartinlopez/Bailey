@@ -8,8 +8,11 @@ export interface BranchAvailability {
 
 export interface BranchHours {
   days: string;
+  closedDaysLabel: string;
   opensAt: string;
   closesAt: string;
+  /** 0 = domingo ... 6 = sábado */
+  closedWeekdays: number[];
 }
 
 export interface Branch {

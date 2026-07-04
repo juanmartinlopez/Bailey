@@ -20,24 +20,20 @@ function Footer() {
             </a>
           </div>
 
-          {/* Teléfono */}
-          <div className="flex flex-col items-center">
-            <a
-              href={`https://wa.me/${bailey.phone}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center justify-center"
-            >
-              <FiPhone className="mr-2" />
-              <p className="text-sm">+{bailey.phone}</p>
-            </a>
-          </div>
-
-          {/* Sucursales y direcciones */}
-          <div className="flex flex-col items-center gap-2">
-            {branches.map((branch) => (
+          {/* Sucursales, teléfonos y direcciones */}
+          {branches.map((branch) => (
+            <div key={branch.id} className="flex flex-col items-center gap-2">
+              <p className="text-sm font-semibold">{branch.name}</p>
               <a
-                key={branch.id}
+                href={`https://wa.me/${branch.phone}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center hover:underline"
+              >
+                <FiPhone className="mr-2" />
+                <p className="text-sm">+{branch.phone}</p>
+              </a>
+              <a
                 href={`https://www.google.com/maps?q=${branch.lat},${branch.lng}`}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -46,8 +42,8 @@ function Footer() {
                 <LuMapPin className="mr-1 flex-shrink-0" />
                 <p className="text-sm">{branch.address}</p>
               </a>
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
 
         {/* Copyright */}
