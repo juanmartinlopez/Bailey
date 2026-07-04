@@ -36,17 +36,11 @@ function isBranchOpenNow(openAt: string, closeAt: string) {
   return currentMinutes >= openMinutes && currentMinutes < closeMinutes;
 }
 
-// function getGoogleMapsUrl(lat: number, lng: number) {
-//   const query = `${lat},${lng}`;
-//   return `https://www.google.com/maps?q=${query}`;
-// }
-
 function BranchStatusCard() {
   const { cart } = useCartContext();
   const { branches, selectedBranch, distanceFromUserKm, changeBranch } = useBranch();
 
   const branchIsOpen = isBranchOpenNow(selectedBranch.hours.opensAt, selectedBranch.hours.closesAt);
-  // const mapsUrl = getGoogleMapsUrl(selectedBranch.lat, selectedBranch.lng);
 
   const handleBranchChange = async (branchId: string) => {
     const nextBranch = branches.find((branch) => branch.id === branchId);
@@ -93,7 +87,7 @@ function BranchStatusCard() {
           <div className="flex gap-3">
             <span className="min-w-20 font-semibold text-gray-500">Dirección</span>
             <a
-              href={`https://www.google.com/maps?q=${selectedBranch.lat},${selectedBranch.lng}`}
+              href={selectedBranch.mapsUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-start gap-1 text-primary-red underline decoration-primary-red/30 underline-offset-4 transition-colors hover:text-primary-red/80"
