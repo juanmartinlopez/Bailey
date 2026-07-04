@@ -6,6 +6,12 @@ export interface BranchAvailability {
   addons: boolean;
 }
 
+export interface BranchHours {
+  days: string;
+  opensAt: string;
+  closesAt: string;
+}
+
 export interface Branch {
   id: string;
   name: string;
@@ -13,5 +19,6 @@ export interface Branch {
   phone: string;
   lat: number;
   lng: number;
+  hours: BranchHours;
   availableProducts: BranchAvailability;
 }

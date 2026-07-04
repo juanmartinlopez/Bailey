@@ -10,6 +10,7 @@ const BRANCH_STORAGE_KEY = "bailey_branch_id";
 interface BranchContextType {
   branches: Branch[];
   selectedBranch: Branch;
+  nearestBranch: Branch | null;
   distanceFromUserKm: number | null;
   detectNearestBranch: () => Promise<Branch>;
   setSelectedBranch: (branch: Branch) => void;
@@ -51,6 +52,7 @@ const BranchContext = createContext<BranchContextType | undefined>(undefined);
 export function BranchProvider({ children }: BranchProviderProps) {
   const [selectedBranch, setSelectedBranchState] = useState<Branch>(getInitialBranch);
   const [userCoords, setUserCoords] = useState<{ lat: number; lng: number } | null>(null);
+  const [nearestBranch, setNearestBranch] = useState<Branch | null>(null);
   const [distanceFromUserKm, setDistanceFromUserKm] = useState<number | null>(null);
   const [hasDetectedBranch, setHasDetectedBranch] = useState(false);
 
@@ -109,6 +111,7 @@ export function BranchProvider({ children }: BranchProviderProps) {
             return candidateDistance < closestDistance ? candidate : closest;
           }, branches[0]);
 
+          setNearestBranch(nearestBranch);
           setSelectedBranchState(nearestBranch);
           resolve(nearestBranch);
         },
@@ -122,7 +125,7 @@ export function BranchProvider({ children }: BranchProviderProps) {
         }
       );
     });
-  }, []);
+  }, [selectedBranch]);
 
   // Solo detectar sucursal más cercana una sola vez al montar
   useEffect(() => {
@@ -168,12 +171,13 @@ export function BranchProvider({ children }: BranchProviderProps) {
     () => ({
       branches,
       selectedBranch,
+      nearestBranch,
       distanceFromUserKm,
       detectNearestBranch,
       setSelectedBranch,
       changeBranch,
     }),
-    [selectedBranch, distanceFromUserKm, detectNearestBranch, setSelectedBranch, changeBranch]
+    [selectedBranch, nearestBranch, distanceFromUserKm, detectNearestBranch, setSelectedBranch, changeBranch]
   );
 
   return <BranchContext.Provider value={value}>{children}</BranchContext.Provider>;

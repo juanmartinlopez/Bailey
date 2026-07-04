@@ -58,12 +58,15 @@ function NavBar() {
           <div className="w-8 h-8 rounded-full bg-white border border-gray-200 flex items-center justify-center text-primary-red">
             <MdStorefront className="text-lg" />
           </div>
-          <div className="flex flex-col leading-tight">
+          <div className="flex flex-col leading-tight max-w-[230px]">
             <span className="text-[11px] uppercase tracking-wide text-gray-500">
               Sucursal
             </span>
             <span className="text-sm font-semibold text-gray-800">
               {selectedBranch.name}
+            </span>
+            <span className="text-[11px] text-gray-500">
+              {selectedBranch.hours.days} · {selectedBranch.hours.opensAt} a {selectedBranch.hours.closesAt}
             </span>
           </div>
           {distanceFromUserKm !== null && (
@@ -76,7 +79,7 @@ function NavBar() {
 
         <div
           ref={branchMenuRef}
-          className="relative flex items-center mr-2 md:mr-4"
+          className="relative hidden md:flex items-center mr-2 md:mr-4"
         >
           <button
             type="button"

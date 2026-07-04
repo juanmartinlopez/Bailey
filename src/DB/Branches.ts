@@ -8,6 +8,11 @@ const branches: Branch[] = [
     phone: "542644842028",
     lat: -31.5375,
     lng: -68.5364,
+    hours: {
+      days: "Lun a Dom",
+      opensAt: "11:00",
+      closesAt: "23:30",
+    },
     availableProducts: {
       burger: true,
       fries: true,
@@ -23,10 +28,15 @@ const branches: Branch[] = [
     phone: "542644842028",
     lat: -31.569,
     lng: -68.541,
+    hours: {
+      days: "Lun a Dom",
+      opensAt: "11:00",
+      closesAt: "23:00",
+    },
     availableProducts: {
       burger: true,
       fries: true,
-      pachata: false,
+      pachata: true,
       drink: true,
       addons: true,
     },
