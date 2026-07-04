@@ -27,7 +27,7 @@ const branches: Branch[] = [
     id: "Rawson",
     name: "Sucursal Rawson",
     address: "Rawson, San Juan",
-    phone: "542644842028",
+    phone: "542645058160",
     lat: -31.559084341328013,
     lng: -68.51405792322045,
     mapsUrl:
