@@ -2,12 +2,12 @@ import type { Branch } from "../types";
 
 const branches: Branch[] = [
   {
-    id: "centro",
-    name: "Sucursal Centro",
+    id: "Villa Krause",
+    name: "Sucursal Villa Krause",
     address: "Villa Krause, San Juan",
     phone: "542644842028",
-    lat: -31.5375,
-    lng: -68.5364,
+    lat: -31.58846112540744,
+    lng: -68.53673065273559,
     hours: {
       days: "Lun a Dom",
       opensAt: "11:00",
@@ -22,12 +22,12 @@ const branches: Branch[] = [
     },
   },
   {
-    id: "sur",
-    name: "Sucursal Sur",
+    id: "Rawson",
+    name: "Sucursal Rawson",
     address: "Rawson, San Juan",
     phone: "542644842028",
-    lat: -31.569,
-    lng: -68.541,
+    lat: -31.559084341328013,
+    lng: -68.51405792322045, 
     hours: {
       days: "Lun a Dom",
       opensAt: "11:00",
