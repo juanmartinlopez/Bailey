@@ -5,7 +5,7 @@ export interface Burger {
   image: string;
   priceSimple: number;
   priceDoble: number;
-  priceTriple: number;
+  priceTriple?: number;
 }
 
 export type BurgerDatabase = Record<number, Burger>;

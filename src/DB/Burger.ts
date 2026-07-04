@@ -90,18 +90,25 @@ const burgers = {
     priceDoble: 14000,
     priceTriple: 17000,
   },
- 10: { 
-   id: 10,
-   name: "Smoky burger",
-     description:
-       "smash burger de blen de carne vacuna, cheddar, verduritas asadas, mayo de ajo asado, bacon y pan de papa.",
-   image: "",
-   priceSimple: 11900,
-   priceDoble: 15500,
-   priceTriple: 18800,
- },
-  }
-   
-   
+  10: {
+    id: 10,
+    name: "Smoky burger",
+    description:
+      "smash burger de blen de carne vacuna, cheddar, verduritas asadas, mayo de ajo asado, bacon y pan de papa.",
+    image: "",
+    priceSimple: 11900,
+    priceDoble: 15500,
+    priceTriple: 18800,
+  },
+  11: {
+    id: 11,
+    name: "Pretzel Avocado NO DISPONIBLE",
+    description:
+      "Carne smash, cebolla morada, palta, tomate, huevo, queso tybo, pan pretzel y salsa bailey’s.",
+    image: "",
+    priceSimple: 13000,
+    priceDoble: 16000,
+  },
+};
 
 export default burgers;
