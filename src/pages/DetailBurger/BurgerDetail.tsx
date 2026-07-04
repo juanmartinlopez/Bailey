@@ -6,13 +6,14 @@ import NavBarSecundary from "../../components/NavBarSecundary/NavBarSecundary";
 import { useCartContext } from "../../context";
 import addons from "../../DB/Addons";
 import burgers from "../../DB/Burger";
-import { useSEO } from "../../hooks";
+import { useBranch, useSEO } from "../../hooks";
 import type { Burger } from "../../types";
 
 function BurgerDetail() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const { addToCart } = useCartContext();
+  const { selectedBranch } = useBranch();
   const [burger, setBurger] = useState<Burger | null>(null);
   const [selectedSize, setSelectedSize] = useState<
     "Simple" | "Doble" | "Triple"
@@ -23,6 +24,16 @@ function BurgerDetail() {
   const [comment, setComment] = useState<string>("");
 
   useEffect(() => {
+    if (!selectedBranch.availableProducts.burger) {
+      void Swal.fire({
+        title: "Producto no disponible",
+        text: `Las hamburguesas no están disponibles en ${selectedBranch.name}.`,
+        icon: "warning",
+        confirmButtonColor: "#9D1309",
+      }).then(() => navigate("/"));
+      return;
+    }
+
     if (id) {
       const burgerId = parseInt(id);
       const foundBurger = burgers[burgerId as keyof typeof burgers];
@@ -33,7 +44,7 @@ function BurgerDetail() {
         navigate("/");
       }
     }
-  }, [id, navigate]);
+  }, [id, navigate, selectedBranch]);
 
   // SEO dinámico basado en la hamburguesa
   useSEO({

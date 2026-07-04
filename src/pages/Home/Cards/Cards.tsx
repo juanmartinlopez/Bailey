@@ -1,16 +1,33 @@
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { CiFries } from "react-icons/ci";
 import { GiSandwich } from "react-icons/gi";
 import { PiHamburgerFill } from "react-icons/pi";
 import burgers from "../../../DB/Burger";
 import fries from "../../../DB/Fries";
 import pachata from "../../../DB/Pachata";
+import { useBranch } from "../../../hooks";
 import Card from "../Card/Card";
 
 type Category = "burgers" | "pachata" | "fries";
 
 function Cards() {
+  const { selectedBranch } = useBranch();
   const [selectedCategory, setSelectedCategory] = useState<Category>("burgers");
+
+  const availableCategories = useMemo(() => {
+    const categories: Category[] = [];
+    if (selectedBranch.availableProducts.burger) categories.push("burgers");
+    if (selectedBranch.availableProducts.pachata) categories.push("pachata");
+    if (selectedBranch.availableProducts.fries) categories.push("fries");
+    return categories;
+  }, [selectedBranch.availableProducts]);
+
+  useEffect(() => {
+    if (availableCategories.length === 0) return;
+    if (!availableCategories.includes(selectedCategory)) {
+      setSelectedCategory(availableCategories[0]);
+    }
+  }, [availableCategories, selectedCategory]);
 
   const getItemsForCategory = () => {
     switch (selectedCategory) {
@@ -26,6 +43,16 @@ function Cards() {
   };
 
   const items = getItemsForCategory();
+
+  if (availableCategories.length === 0) {
+    return (
+      <div className="w-full mb-8 text-center py-16">
+        <p className="text-lg text-gray-700 font-medium">
+          No hay productos disponibles en esta sucursal por el momento.
+        </p>
+      </div>
+    );
+  }
 
   const getCategoryIcon = (category: Category) => {
     switch (category) {
@@ -57,7 +84,7 @@ function Cards() {
     <div className="w-full mb-8">
       {/* Navegación de categorías */}
       <div className="flex justify-center gap-8">
-        {(["burgers", "pachata", "fries"] as Category[]).map((category) => (
+        {availableCategories.map((category) => (
           <button
             key={category}
             onClick={() => setSelectedCategory(category)}

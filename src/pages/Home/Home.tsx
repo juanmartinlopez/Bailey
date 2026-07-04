@@ -1,6 +1,7 @@
 // Update the import path below if your components are in a different folder, e.g. "../../components"
 import { Footer, NavBar } from "../../components";
 import { useSEO } from "../../hooks";
+import BranchStatusCard from "../../components/BranchStatusCard/BranchStatusCard";
 import Cards from "./Cards/Cards";
 
 function Home() {
@@ -17,6 +18,7 @@ function Home() {
     <div className="min-h-screen">
       <NavBar />
       <main className="container mx-auto min-h-[80vh]">
+        <BranchStatusCard />
         {/* H1 accesible para SEO, oculto visualmente para no alterar el diseño */}
         <h1 className="sr-only">
           Bailey's Burger San Juan – Pedí online hamburguesas smash artesanales,

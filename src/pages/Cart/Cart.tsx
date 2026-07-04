@@ -1,9 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { IoChevronDown } from "react-icons/io5";
+import { MdLocationOn, MdStorefront } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import { Footer, NavBarSecundary } from "../../components";
-import { useCartContext } from "../../context";
+import { getUnavailableCartItems, useCartContext } from "../../context";
 import drinks from "../../DB/Drink";
-import { useSEO } from "../../hooks";
+import { useBranch, useSEO } from "../../hooks";
 import type { CartDrinkItem } from "../../types";
 
 function Cart() {
@@ -16,11 +18,16 @@ function Cart() {
     getTotalPrice,
     getTotalItems,
   } = useCartContext();
+  const { branches, selectedBranch, distanceFromUserKm, changeBranch } =
+    useBranch();
+  const unavailableItems = getUnavailableCartItems(cart, selectedBranch);
 
   // Estado para las cantidades de bebidas
   const [drinkQuantities, setDrinkQuantities] = useState<
     Record<number, number>
   >({});
+  const [isBranchMenuOpen, setIsBranchMenuOpen] = useState(false);
+  const branchMenuRef = useRef<HTMLDivElement>(null);
 
   // SEO para página del carrito
   useSEO({
@@ -43,6 +50,23 @@ function Cart() {
     });
     setDrinkQuantities(initialQuantities);
   }, [cart]);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        branchMenuRef.current &&
+        !branchMenuRef.current.contains(event.target as Node)
+      ) {
+        setIsBranchMenuOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   const handleRemoveItem = (itemId: string) => {
     removeFromCart(itemId);
@@ -93,6 +117,18 @@ function Cart() {
     navigate("/checkout");
   };
 
+  const handleBranchChange = async (branchId: string) => {
+    const nextBranch = branches.find((branch) => branch.id === branchId);
+    if (!nextBranch) return;
+
+    const changed = await changeBranch(nextBranch, cart);
+    if (!changed) {
+      return;
+    }
+
+    setIsBranchMenuOpen(false);
+  };
+
   if (cart.length === 0) {
     return (
       <div className="bg-white">
@@ -136,6 +172,95 @@ function Cart() {
                 Vaciar carrito
               </button>
             </div>
+
+            <div className="mb-6 p-4 border border-gray-200 rounded-xl bg-gray-50">
+              <div className="flex items-start md:items-center justify-between gap-4 flex-col md:flex-row">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-white border border-gray-200 flex items-center justify-center text-primary-red">
+                    <MdStorefront className="text-xl" />
+                  </div>
+                  <div>
+                    <p className="text-xs uppercase tracking-wide text-gray-500">
+                      Sucursal seleccionada
+                    </p>
+                    <p className="font-semibold text-gray-900">{selectedBranch.name}</p>
+                    {distanceFromUserKm !== null && (
+                      <p className="text-sm text-gray-600 flex items-center gap-1 mt-0.5">
+                        <MdLocationOn className="text-primary-red" />
+                        {distanceFromUserKm.toFixed(1)} km desde tu ubicación
+                      </p>
+                    )}
+                  </div>
+                </div>
+
+                <div ref={branchMenuRef} className="relative">
+                  <button
+                    type="button"
+                    onClick={() => setIsBranchMenuOpen((prev) => !prev)}
+                    className="flex items-center gap-2 border border-gray-300 rounded-lg px-3 py-2 bg-white hover:border-gray-400 transition-colors"
+                    aria-label="Seleccionar sucursal"
+                    aria-haspopup="listbox"
+                    aria-expanded={isBranchMenuOpen}
+                  >
+                    <MdStorefront className="text-primary-red" />
+                    <span className="text-sm font-medium text-gray-800 max-w-[150px] truncate">
+                      {selectedBranch.name}
+                    </span>
+                    <IoChevronDown
+                      className={`text-gray-500 transition-transform ${
+                        isBranchMenuOpen ? "rotate-180" : ""
+                      }`}
+                    />
+                  </button>
+
+                  {isBranchMenuOpen && (
+                    <div className="absolute top-full right-0 mt-2 w-56 bg-white border border-gray-200 rounded-xl shadow-lg overflow-hidden z-40">
+                      <div className="px-3 py-2 text-[11px] uppercase tracking-wide text-gray-500 border-b border-gray-100">
+                        Elegi tu sucursal
+                      </div>
+                      <ul
+                        role="listbox"
+                        aria-label="Opciones de sucursal"
+                        className="py-1"
+                      >
+                        {branches.map((branch) => {
+                          const isActive = branch.id === selectedBranch.id;
+
+                          return (
+                            <li key={branch.id}>
+                              <button
+                                type="button"
+                                onClick={() => handleBranchChange(branch.id)}
+                                className={`w-full text-left px-3 py-2 text-sm transition-colors ${
+                                  isActive
+                                    ? "bg-primary-red/10 text-primary-red font-semibold"
+                                    : "text-gray-700 hover:bg-gray-100"
+                                }`}
+                                role="option"
+                                aria-selected={isActive}
+                              >
+                                {branch.name}
+                              </button>
+                            </li>
+                          );
+                        })}
+                      </ul>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+
+            {unavailableItems.length > 0 && (
+              <div className="mb-6 p-4 border border-amber-300 bg-amber-50 rounded-lg">
+                <p className="font-semibold text-amber-800 mb-1">
+                  Algunos productos no están disponibles en esta sucursal:
+                </p>
+                <p className="text-amber-700 text-sm">
+                  {unavailableItems.map((item) => item.product.name).join(", ")}
+                </p>
+              </div>
+            )}
 
             <div className="space-y-4">
               {cart.map((item) => (
@@ -213,7 +338,8 @@ function Cart() {
             </div>
 
             {/* Sección de Bebidas */}
-            <div className="mt-8">
+            {selectedBranch.availableProducts.drink && (
+              <div className="mt-8">
               <h2 className="text-xl font-bold text-gray-900 mb-4">
                 Agregar Bebidas
               </h2>
@@ -256,7 +382,8 @@ function Cart() {
                   </div>
                 ))}
               </div>
-            </div>
+              </div>
+            )}
 
             <div className="border-t border-gray-200 mt-6 pt-6">
               <div className="flex justify-between items-center">
@@ -265,6 +392,7 @@ function Cart() {
                 </span>
                 <button
                   onClick={handleCheckout}
+                  disabled={unavailableItems.length > 0}
                   className="bg-primary-red text-white px-8 py-3 rounded-lg font-medium hover:bg-red-700 transition-colors"
                 >
                   Finalizar Compra
