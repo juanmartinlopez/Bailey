@@ -36,17 +36,17 @@ function isBranchOpenNow(openAt: string, closeAt: string) {
   return currentMinutes >= openMinutes && currentMinutes < closeMinutes;
 }
 
-function getGoogleMapsUrl(lat: number, lng: number) {
-  const query = `${lat},${lng}`;
-  return `https://www.google.com/maps?q=${query}`;
-}
+// function getGoogleMapsUrl(lat: number, lng: number) {
+//   const query = `${lat},${lng}`;
+//   return `https://www.google.com/maps?q=${query}`;
+// }
 
 function BranchStatusCard() {
   const { cart } = useCartContext();
   const { branches, selectedBranch, distanceFromUserKm, changeBranch } = useBranch();
 
   const branchIsOpen = isBranchOpenNow(selectedBranch.hours.opensAt, selectedBranch.hours.closesAt);
-  const mapsUrl = getGoogleMapsUrl(selectedBranch.lat, selectedBranch.lng);
+  // const mapsUrl = getGoogleMapsUrl(selectedBranch.lat, selectedBranch.lng);
 
   const handleBranchChange = async (branchId: string) => {
     const nextBranch = branches.find((branch) => branch.id === branchId);
