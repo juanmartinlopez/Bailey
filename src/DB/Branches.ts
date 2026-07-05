@@ -3,7 +3,7 @@ import type { Branch } from "../types";
 const branches: Branch[] = [
   {
     id: "Villa Krause",
-    name: "Sucursal Villa Krause",
+    name: "Bailey’s Burger",
     address: "Villa Krause, San Juan",
     phone: "542644842028",
     lat: -31.58846112540744,
@@ -27,7 +27,7 @@ const branches: Branch[] = [
   },
   {
     id: "Rawson",
-    name: "Sucursal Rawson",
+    name: "Bailey's Burger trinidad",
     address: "Rawson, San Juan",
     phone: "542645058160",
     lat: -31.559084341328013,
