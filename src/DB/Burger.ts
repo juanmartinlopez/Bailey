@@ -119,6 +119,6 @@ const burgers = {
     priceDoble: 14500,
     priceTriple: 18500,
   },
-    {;
+};
 
 export default burgers;
