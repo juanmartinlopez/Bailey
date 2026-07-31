@@ -109,6 +109,15 @@ const burgers = {
     priceSimple: 13000,
     priceDoble: 16000,
   },
-};
+  12: {
+    id: 12,
+    name: "La Argenta",
+    description:
+      "Carne smash, queso tybo, lechuga, tomate, huevo, jamon cocido, pan de papa, ketchup, mostaza y mayonesa.",
+    image: "",
+    priceSimple: 10500,
+    priceDoble: 14500,
+    priceTriple: 18500,
+    {;
 
 export default burgers;
