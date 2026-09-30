@@ -3,7 +3,7 @@ const burgers = {
     id: 1,
     name: "Cheese Burger",
     description:
-      "Smash burger de blend de carne vacuna, cheddar, salsa bailey’s y pan de papa.",
+      "Smash burger de blend de carne vacuna, cheddar, salsa bailey’s, pan de papa y papas fritas .",
     image: "",
     priceSimple: 9500,
     priceDoble: 13000,
@@ -13,7 +13,7 @@ const burgers = {
     id: 2,
     name: "Bacon Cheeseburger",
     description:
-      "Smash burger de blend de carne vacuna, cheddar, bacon, salsa bailey’s y pan de papa.",
+      "Smash burger de blend de carne vacuna, cheddar, bacon, salsa bailey’s, pan de papa y papas fritas.",
     image: "",
     priceSimple: 10000,
     priceDoble: 14500,
@@ -23,7 +23,7 @@ const burgers = {
     id: 3,
     name: "Oklahoma burger",
     description:
-      "Smash burger de blend de carne vacuna, cebollita smasheada, cheddar, salsa bailey’s y pan de papa.",
+      "Smash burger de blend de carne vacuna, cebollita smasheada, cheddar, salsa bailey’s, pan de papa y papas fritas.",
     image: "",
     priceSimple: 9500,
     priceDoble: 13500,
@@ -33,7 +33,7 @@ const burgers = {
     id: 4,
     name: "American burger",
     description:
-      "Smash burger de blend de carne vacuna, tomate, lechuga, pepinillos, cheddar, salsa bailey’s y pan de papa.",
+      "Smash burger de blend de carne vacuna, tomate, lechuga, pepinillos, cheddar, salsa bailey’s, pan de papa y papas fritas.",
     image: "",
     priceSimple: 10500,
     priceDoble: 14500,
@@ -43,7 +43,7 @@ const burgers = {
     id: 5,
     name: "Bailey's Burger",
     description:
-      "Smash burger de blend de carne vacuna, huevo, bacon, BBQ, cheddar y pan de papa.",
+      "Smash burger de blend de carne vacuna, huevo, bacon, BBQ, cheddar, pan de papa y papas fritas.",
     image: "",
     priceSimple: 10500,
     priceDoble: 14500,
@@ -53,7 +53,7 @@ const burgers = {
     id: 6,
     name: "Crispy",
     description:
-      "Smash burger de carne vacuna, cebolla, crispy, bacon, BBQ, cheddar, queso tybo y pan de papa.",
+      "Smash burger de carne vacuna, cebolla, crispy, bacon, BBQ, cheddar, queso tybo, pan de papa y papas fritas.",
 
     image: "",
     priceSimple: 11000,
@@ -64,7 +64,7 @@ const burgers = {
     id: 7,
     name: "Dulce fuego",
     description:
-      "Smash burger de blend de carne vacuna, mermelada de pimientos levemente picante, cheddar y pan de papa.",
+      "Smash burger de blend de carne vacuna, mermelada de pimientos levemente picante, cheddar, pan de papa y papas fritas.",
     image: "",
     priceSimple: 10000,
     priceDoble: 14500,
@@ -74,7 +74,7 @@ const burgers = {
     id: 8,
     name: "Classic burger",
     description:
-      "Smash burger de blend de carne vacuna, brunoise, cheddar, ketchup, mostaza y pan de papa.",
+      "Smash burger de blend de carne vacuna, brunoise, cheddar, ketchup, mostaza, pan de papa y papas fritas .",
     image: "",
     priceSimple: 9500,
     priceDoble: 13000,
@@ -84,7 +84,7 @@ const burgers = {
     id: 9,
     name: "Sweet onion",
     description:
-      "Smash burger de blend de carne vacuna, cebolla caramelizada, cheddar, panceta, BBQ y pan de papa.",
+      "Smash burger de blend de carne vacuna, cebolla caramelizada, cheddar, panceta, BBQ, pan de papa y papas fritas.",
     image: "",
     priceSimple: 11000,
     priceDoble: 14500,
@@ -94,7 +94,7 @@ const burgers = {
     id: 10,
     name: "Smoky burger",
     description:
-      "smash burger de blen de carne vacuna, cheddar, verduritas asadas, mayo de ajo asado, bacon y pan de papa.",
+      "smash burger de blen de carne vacuna, cheddar, verduritas asadas, mayo de ajo asado, bacon, pan de papa y papas fritas.",
     image: "",
     priceSimple: 12400,
     priceDoble: 16000,
@@ -113,7 +113,7 @@ const burgers = {
     id: 12,
     name: "La Argenta",
     description:
-      "Carne smash, queso tybo, lechuga, tomate, huevo, jamon cocido, pan de papa, ketchup, mostaza y mayonesa.",
+      "Carne smash, queso tybo, lechuga, tomate, huevo, jamon cocido, pan de papa, ketchup, mostaza, mayonesa y papas fritas.",
     image: "",
     priceSimple: 11000,
     priceDoble: 15000,
