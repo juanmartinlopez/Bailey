@@ -2,13 +2,13 @@ const fries = {
   1: {
     id: 1,
     name: "Papa fritas Chicas",
-    price: 5200,
+    price: 7000,
     image: "",
   },
   2: {
     id: 2,
     name: "Papa fritas Grandes",
-    price: 6200,
+    price: 8000,
     image: "",
   },
 };
