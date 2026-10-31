@@ -119,6 +119,16 @@ const burgers = {
     priceDoble: 15000,
     priceTriple: 19000,
   },
-};
+  13: {
+    id: 13,
+    name: "¡ESPECIAL HALLOWEEN!",
+    description:
+      "Carne smash, Muzzarella, roquefort, mayo de ajo, cebollita de verdeo, pan de papa y papas fritas.",
+    image: "",
+    priceSimple: 12000,
+    priceDoble: 16000,
+    priceTriple: 19000,
+  },
+}; 
 
 export default burgers;
